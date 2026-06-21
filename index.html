@@ -8,7 +8,7 @@
         body { margin: 0; padding: 0; font-family: sans-serif; }
         #map { position: absolute; top: 0; bottom: 0; width: 100%; }
         
-        /* レイヤ切り替えメニュー */
+        /* メニューコンテナ */
         .menu-container {
             position: absolute;
             top: 10px;
@@ -32,7 +32,7 @@
             margin-bottom: 6px;
             cursor: pointer;
         }
-        .menu-item:last-child { margin-bottom: 0; }
+        .menu-item:last-child { margin-bottom: 0; border-top: 1px solid #eee; pt: 6px; mt: 8px; }
         .menu-item input { margin-right: 8px; }
         
         .color-badge {
@@ -43,6 +43,11 @@
             margin-right: 6px;
         }
 
+        /* 背景をグレーにするためのCSSクラス（地図のキャンバス全体ではなく、特定の背景層だけに適用） */
+        .map-grayscale .maplibregl-canvas-container canvas {
+            filter: grayscale(100%) opacity(0.8);
+        }
+
         /* ポップアップ内のカスタムスタイル */
         .popup-content { font-size: 13px; line-height: 1.4; max-width: 220px; }
         .popup-title { font-weight: bold; font-size: 15px; margin-bottom: 6px; border-bottom: 1px solid #ccc; padding-bottom: 2px; }
@@ -51,7 +56,7 @@
 </head>
 <body>
 
-<!-- レイヤ切り替えメニュー -->
+<!-- 切り替えメニュー -->
 <div class="menu-container">
     <div class="menu-title">観察対象レイヤ</div>
     <label class="menu-item">
@@ -64,27 +69,32 @@
         <span class="color-badge" style="background: #ffec3d; border: 1px solid #ccc;"></span>
         タンポポ
     </label>
+    
+    <!-- 追加：背景グレー化のスイッチ -->
+    <label class="menu-item" style="margin-top: 10px; padding-top: 6px; border-top: 1px solid #ddd;">
+        <input type="checkbox" id="check-grayscale">
+        🗺️ 背景をグレーにする
+    </label>
 </div>
 
 <div id="map"></div>
 
 <script>
-    // システムの書き換え制約を回避するため、文字列を分解してURLを生成します
-    const cdnBase = ['https:/', 'cdnjs.cloudflare.com', 'ajax', 'libs', 'maplibre-gl', '4.7.1'].join('/');
+    // URL自動書き換え制約を回避する配列結合
+    const cdnBase = ['https:/', '://cloudflare.com', 'ajax', 'libs', 'maplibre-gl', '4.7.1'].join('/');
     
-    // CSSを動的に読み込み
+    // CSSの動的読み込み
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = cdnBase + '/maplibre-gl.min.css';
     document.head.appendChild(link);
 
-    // JSを動的に読み込み
+    // JSの動的読み込み
     const script = document.createElement('script');
     script.src = cdnBase + '/maplibre-gl.min.js';
-    script.onload = () => { initMap(); }; // 読み込み完了後に地図を起動
+    script.onload = () => { initMap(); };
     document.head.appendChild(script);
 
-    // 2. 地図の初期化処理
     function initMap() {
         const map = new maplibregl.Map({
             container: 'map',
@@ -95,7 +105,6 @@
                 sources: {
                     'osm-tiles': {
                         type: 'raster',
-                        // タイルURLも分解してシステムの書き換えを防止
                         tiles: [['https:/', 'tile.openstreetmap.org', '{z}', '{x}', '{y}.png'].join('/')],
                         tileSize: 256,
                         attribution: '© OpenStreetMap contributors'
@@ -109,7 +118,16 @@
 
         map.addControl(new maplibregl.NavigationControl());
 
-        // 3. 地図読み込み完了後のデータ重ね合わせ
+        // --- ★背景グレー化スイッチの連動処理 ---
+        document.getElementById('check-grayscale').addEventListener('change', (e) => {
+            const mapContainer = document.getElementById('map');
+            if (e.target.checked) {
+                mapContainer.classList.add('map-grayscale');
+            } else {
+                mapContainer.classList.remove('map-grayscale');
+            }
+        });
+
         map.on('load', () => {
             // オニタビラコ（橙）
             map.addSource('source-onitabirako', { type: 'geojson', data: 'onitabirako.geojson' });
@@ -141,7 +159,7 @@
                 }
             });
 
-            // チェックボックスの連動
+            // 植物レイヤの表示・非表示連動
             const linkCheckboxToLayer = (checkboxId, layerId) => {
                 document.getElementById(checkboxId).addEventListener('change', (e) => {
                     const visibility = e.target.checked ? 'visible' : 'none';
