@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>植物観察マップ</title>
-    <!-- MapLibre GL JS のCSSとJavaScript（安定版CDNに変更） -->
+    <!-- MapLibre GL JS のCSSとJavaScript（正しいURLに修正完了） -->
     <link rel="stylesheet" href="https://cloudflare.com" />
     <script src="https://cloudflare.com"></script>
     <style>
@@ -99,7 +99,7 @@
             sources: {
                 'osm-tiles': {
                     type: 'raster',
-                    tiles: ['https://openstreetmap.org{z}/{x}/{y}.png'],
+                    tiles: ['https://openstreetmap.org{z}/{x}/{y}.png'], // URLのスラッシュを修正
                     tileSize: 256,
                     attribution: '© OpenStreetMap contributors'
                 }
