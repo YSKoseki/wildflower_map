@@ -116,7 +116,7 @@
     map.on('load', () => {
         
         // --- オニタビラコ（橙） ---
-        map.addSource('source-onitabirako', { type: 'geojson', data: './onitabirako.geojson' });
+        map.addSource('source-onitabirako', { type: 'geojson', data: 'onitabirako.geojson' });
         map.addLayer({
             id: 'layer-onitabirako-points',
             type: 'circle',
@@ -131,7 +131,7 @@
         });
 
         // --- タンポポ（黄） ---
-        map.addSource('source-tanpopo', { type: 'geojson', data: './tanpopo.geojson' });
+        map.addSource('source-tanpopo', { type: 'geojson', data: 'tanpopo.geojson' });
         map.addLayer({
             id: 'layer-tanpopo-points',
             type: 'circle',
