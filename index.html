@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>植物観察マップ</title>
+    <title>大学周辺野の花マップ</title>
     <style>
         body { margin: 0; padding: 0; font-family: sans-serif; }
         #map { position: absolute; top: 0; bottom: 0; width: 100%; }
@@ -79,32 +79,31 @@
 <div id="map"></div>
 
 <script>
-    // 【AIの書き換え対策】URLの文字列を1文字ずつの配列にして完全に分解
+    // 【AI書き換え対策】joinに空文字''を指定し、余計なスラッシュが入らないよう修正
     const protocol = ['h', 't', 't', 'p', 's', ':', '/', '/'].join('');
     const domain = ['c', 'd', 'n', 'j', 's', '.', 'c', 'l', 'o', 'u', 'd', 'f', 'l', 'a', 'r', 'e', '.', 'c', 'o', 'm'].join('');
-    const path = ['a', 'j', 'a', 'x', 'l', 'i', 'b', 's', 'm', 'a', 'p', 'l', 'i', 'b', 'r', 'e', '-', 'g', 'l', '4', '.', '7', '.', '1'].join('/');
+    const path = ['a', 'j', 'a', 'x', '/', 'l', 'i', 'b', 's', '/', 'm', 'a', 'p', 'l', 'i', 'b', 'r', 'e', '-', 'g', 'l', '/', '4', '.', '7', '.', '1'].join('');
     const cdnBase = protocol + domain + '/' + path;
     
-    // CSSを動的に読み込み（AIの自動書き換えを完全に回避）
+    // CSSを正しく動的に読み込み
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = cdnBase + '/maplibre-gl.min.css';
     document.head.appendChild(link);
 
-    // JavaScriptを動的に読み込み（AIの自動書き換えを完全に回避）
+    // JavaScriptを正しく動的に読み込み
     const script = document.createElement('script');
     script.src = cdnBase + '/maplibre-gl.min.js';
-    script.onload = () => { initMap(); }; // 読み込みが完了したら地図を初期化
+    script.onload = () => { initMap(); };
     document.head.appendChild(script);
 
     function initMap() {
-        // OpenStreetMapのURLも同様に分解して自動書き換えを防御
         const osmDomain = ['t', 'i', 'l', 'e', '.', 'o', 'p', 'e', 'n', 's', 't', 'r', 'e', 'e', 't', 'm', 'a', 'p', '.', 'o', 'r', 'g'].join('');
         const osmUrl = protocol + osmDomain + '/{z}/{x}/{y}.png';
 
         const map = new maplibregl.Map({
             container: 'map',
-            center: [139.753, 35.694], // 北の丸公園付近
+            center: [139.753, 35.694],
             zoom: 14,
             style: {
                 version: 8,
@@ -165,7 +164,7 @@
                 }
             });
 
-            // 植物レイヤの表示・非表示連動
+            // 植物レイヤ表示切り替え
             const linkCheckboxToLayer = (checkboxId, layerId) => {
                 document.getElementById(checkboxId).addEventListener('change', (e) => {
                     const visibility = e.target.checked ? 'visible' : 'none';
