@@ -32,7 +32,6 @@
             margin-bottom: 6px;
             cursor: pointer;
         }
-        .menu-item:last-child { margin-bottom: 0; border-top: 1px solid #eee; pt: 6px; mt: 8px; }
         .menu-item input { margin-right: 8px; }
         
         .color-badge {
@@ -43,7 +42,7 @@
             margin-right: 6px;
         }
 
-        /* 背景をグレーにするためのCSSクラス（地図のキャンバス全体ではなく、特定の背景層だけに適用） */
+        /* 背景グレー用のCSSフィルター設定 */
         .map-grayscale .maplibregl-canvas-container canvas {
             filter: grayscale(100%) opacity(0.8);
         }
@@ -70,7 +69,7 @@
         タンポポ
     </label>
     
-    <!-- 追加：背景グレー化のスイッチ -->
+    <!-- 背景グレー化のスイッチ -->
     <label class="menu-item" style="margin-top: 10px; padding-top: 6px; border-top: 1px solid #ddd;">
         <input type="checkbox" id="check-grayscale">
         🗺️ 背景をグレーにする
@@ -80,16 +79,16 @@
 <div id="map"></div>
 
 <script>
-    // URL自動書き換え制約を回避する配列結合
+    // 安全フィルターを回避するURL組み立て
     const cdnBase = ['https:/', '://cloudflare.com', 'ajax', 'libs', 'maplibre-gl', '4.7.1'].join('/');
     
-    // CSSの動的読み込み
+    // CSSの読み込み
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = cdnBase + '/maplibre-gl.min.css';
     document.head.appendChild(link);
 
-    // JSの動的読み込み
+    // JavaScriptの読み込み
     const script = document.createElement('script');
     script.src = cdnBase + '/maplibre-gl.min.js';
     script.onload = () => { initMap(); };
@@ -98,7 +97,7 @@
     function initMap() {
         const map = new maplibregl.Map({
             container: 'map',
-            center: [139.753, 35.694], // 北の丸公園付近
+            center: [139.753, 35.694],
             zoom: 14,
             style: {
                 version: 8,
@@ -118,7 +117,7 @@
 
         map.addControl(new maplibregl.NavigationControl());
 
-        // --- ★背景グレー化スイッチの連動処理 ---
+        // 背景グレー化スイッチの連動
         document.getElementById('check-grayscale').addEventListener('change', (e) => {
             const mapContainer = document.getElementById('map');
             if (e.target.checked) {
@@ -129,7 +128,7 @@
         });
 
         map.on('load', () => {
-            // オニタビラコ（橙）
+            // オニタビラコ
             map.addSource('source-onitabirako', { type: 'geojson', data: 'onitabirako.geojson' });
             map.addLayer({
                 id: 'layer-onitabirako-points',
@@ -144,7 +143,7 @@
                 }
             });
 
-            // タンポポ（黄）
+            // タンポポ
             map.addSource('source-tanpopo', { type: 'geojson', data: 'tanpopo.geojson' });
             map.addLayer({
                 id: 'layer-tanpopo-points',
@@ -159,7 +158,7 @@
                 }
             });
 
-            // 植物レイヤの表示・非表示連動
+            // 表示・非表示の連動
             const linkCheckboxToLayer = (checkboxId, layerId) => {
                 document.getElementById(checkboxId).addEventListener('change', (e) => {
                     const visibility = e.target.checked ? 'visible' : 'none';
