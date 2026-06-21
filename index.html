@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>植物観察マップ</title>
+    <!-- MapLibre GL JS のCSSとJavaScript -->
+    <link href="https://unpkg.com@^4.0.0/dist/maplibre-gl.css" rel="stylesheet" />
+    <script src="https://unpkg.com@^4.0.0/dist/maplibre-gl.js"></script>
+    <style>
+        body { margin: 0; padding: 0; font-family: sans-serif; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+        
+        /* レイヤ切り替えメニュー */
+        .menu-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            z-index: 1;
+            font-size: 14px;
+        }
+        .menu-title {
+            margin: 0 0 8px 0;
+            font-weight: bold;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 4px;
+        }
+        .menu-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+            cursor: pointer;
+        }
+        .menu-item:last-child { margin-bottom: 0; }
+        .menu-item input { margin-right: 8px; }
+        
+        .color-badge {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+
+        /* ポップアップ内のカスタムスタイル */
+        .popup-content {
+            font-size: 13px;
+            line-height: 1.4;
+            max-width: 220px;
+        }
+        .popup-title {
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 6px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 2px;
+        }
+        .popup-img {
+            width: 100%;
+            height: auto;
+            margin-top: 8px;
+            border-radius: 4px;
+            object-fit: cover;
+            max-height: 150px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- レイヤ切り替えメニュー -->
+<div class="menu-container">
+    <div class="menu-title">観察対象レイヤ</div>
+    <label class="menu-item">
+        <input type="checkbox" id="check-onitabirako" checked>
+        <span class="color-badge" style="background: #ffa502;"></span>
+        オニタビラコ
+    </label>
+    <label class="menu-item">
+        <input type="checkbox" id="check-tanpopo" checked>
+        <span class="color-badge" style="background: #ffec3d; border: 1px solid #ccc;"></span>
+        タンポポ
+    </label>
+</div>
+
+<div id="map"></div>
+
+<script>
+    // 1. 地図の初期化（OpenStreetMap背景）
+    const map = new maplibregl.Map({
+        container: 'map',
+        center: [139.753, 35.694], // デモデータに合わせた初期位置（北の丸公園付近）
+        zoom: 14,
+        style: {
+            version: 8,
+            sources: {
+                'osm-tiles': {
+                    type: 'raster',
+                    tiles: ['https://openstreetmap.org{z}/{x}/{y}.png'],
+                    tileSize: 256,
+                    attribution: '© OpenStreetMap contributors'
+                }
+            },
+            layers: [
+                { id: 'osm-layer', type: 'raster', source: 'osm-tiles', minzoom: 0, maxzoom: 19 }
+            ]
+        }
+    });
+
+    map.addControl(new maplibregl.NavigationControl());
+
+    // 2. 地図読み込み完了後の処理
+    map.on('load', () => {
+        
+        // --- オニタビラコ（橙） ---
+        map.addSource('source-onitabirako', { type: 'geojson', data: './onitabirako.geojson' });
+        map.addLayer({
+            id: 'layer-onitabirako-points',
+            type: 'circle',
+            source: 'source-onitabirako',
+            layout: { 'visibility': 'visible' },
+            paint: {
+                'circle-radius': 9,
+                'circle-color': '#ffa502',
+                'circle-stroke-width': 2,
+                'circle-stroke-color': '#fff'
+            }
+        });
+
+        // --- タンポポ（黄） ---
+        map.addSource('source-tanpopo', { type: 'geojson', data: './tanpopo.geojson' });
+        map.addLayer({
+            id: 'layer-tanpopo-points',
+            type: 'circle',
+            source: 'source-tanpopo',
+            layout: { 'visibility': 'visible' },
+            paint: {
+                'circle-radius': 9,
+                'circle-color': '#ffec3d',
+                'circle-stroke-width': 2,
+                'circle-stroke-color': '#a0a0a0'
+            }
+        });
+
+        // --- 3. チェックボックスの連動 ---
+        const linkCheckboxToLayer = (checkboxId, layerId) => {
+            document.getElementById(checkboxId).addEventListener('change', (e) => {
+                const visibility = e.target.checked ? 'visible' : 'none';
+                map.setLayoutProperty(layerId, 'visibility', visibility);
+            });
+        };
+        linkCheckboxToLayer('check-onitabirako', 'layer-onitabirako-points');
+        linkCheckboxToLayer('check-tanpopo', 'layer-tanpopo-points');
+
+        // --- 4. ポップアップ共通設定（種名、観察日時、備考、画像を表示） ---
+        const setupPopup = (layerId) => {
+            map.on('click', layerId, (e) => {
+                const coordinates = e.features[0].geometry.coordinates.slice();
+                const props = e.features[0].properties;
+
+                // GeoJSONのpropertiesから値を取得（空なら代替文字）
+                const species = props.species || '不明';
+                const date = props.date || '未記録';
+                const note = props.note || 'なし';
+                const imageFile = props.image || ''; 
+
+                // ポップアップ内に表示するHTMLの組み立て
+                let popupHtml = `
+                    <div class="popup-content">
+                        <div class="popup-title">🌱 ${species}</div>
+                        <div><strong>日時:</strong> ${date}</div>
+                        <div><strong>備考:</strong> ${note}</div>
+                `;
+                
+                // 画像ファイル名が設定されている場合のみ<img>タグを追加
+                if (imageFile) {
+                    popupHtml += `<img src="./image/${imageFile}" class="popup-img" alt="${species}">`;
+                }
+                
+                popupHtml += `</div>`;
+
+                new maplibregl.Popup()
+                    .setLngLat(coordinates)
+                    .setHTML(popupHtml)
+                    .addTo(map);
+            });
+
+            map.on('mouseenter', layerId, () => { map.getCanvas().style.cursor = 'pointer'; });
+            map.on('mouseleave', layerId, () => { map.getCanvas().style.cursor = ''; });
+        };
+
+        setupPopup('layer-onitabirako-points');
+        setupPopup('layer-tanpopo-points');
+    });
+</script>
+
+</body>
+</html>
