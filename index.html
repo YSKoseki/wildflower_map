@@ -42,8 +42,8 @@
             margin-right: 6px;
         }
 
-        /* 背景をグレーにするためのCSSフィルター設定 */
-        .map-grayscale .maplibregl-canvas-container canvas {
+        /* ★【修正】手前のピンに影響を与えず、背景のOSMタイルレイヤ（.maplibregl-stylelayer）だけをグレーにする */
+        .map-grayscale .maplibregl-stylelayer {
             filter: grayscale(100%) opacity(0.8) !important;
         }
 
@@ -79,19 +79,17 @@
 <div id="map"></div>
 
 <script>
-    // 【AI書き換え対策】joinに空文字''を指定し、余計なスラッシュが入らないよう修正
+    // AI書き換え対策のURL組み立て
     const protocol = ['h', 't', 't', 'p', 's', ':', '/', '/'].join('');
     const domain = ['c', 'd', 'n', 'j', 's', '.', 'c', 'l', 'o', 'u', 'd', 'f', 'l', 'a', 'r', 'e', '.', 'c', 'o', 'm'].join('');
     const path = ['a', 'j', 'a', 'x', '/', 'l', 'i', 'b', 's', '/', 'm', 'a', 'p', 'l', 'i', 'b', 'r', 'e', '-', 'g', 'l', '/', '4', '.', '7', '.', '1'].join('');
     const cdnBase = protocol + domain + '/' + path;
     
-    // CSSを正しく動的に読み込み
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = cdnBase + '/maplibre-gl.min.css';
     document.head.appendChild(link);
 
-    // JavaScriptを正しく動的に読み込み
     const script = document.createElement('script');
     script.src = cdnBase + '/maplibre-gl.min.js';
     script.onload = () => { initMap(); };
