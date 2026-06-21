@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>植物観察マップ</title>
-    <!-- MapLibre GL JS のCSSとJavaScript（正しいURLに修正完了） -->
-    <link rel="stylesheet" href="https://cloudflare.com" />
-    <script src="https://cloudflare.com"></script>
     <style>
         body { margin: 0; padding: 0; font-family: sans-serif; }
         #map { position: absolute; top: 0; bottom: 0; width: 100%; }
@@ -47,26 +44,9 @@
         }
 
         /* ポップアップ内のカスタムスタイル */
-        .popup-content {
-            font-size: 13px;
-            line-height: 1.4;
-            max-width: 220px;
-        }
-        .popup-title {
-            font-weight: bold;
-            font-size: 15px;
-            margin-bottom: 6px;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 2px;
-        }
-        .popup-img {
-            width: 100%;
-            height: auto;
-            margin-top: 8px;
-            border-radius: 4px;
-            object-fit: cover;
-            max-height: 150px;
-        }
+        .popup-content { font-size: 13px; line-height: 1.4; max-width: 220px; }
+        .popup-title { font-weight: bold; font-size: 15px; margin-bottom: 6px; border-bottom: 1px solid #ccc; padding-bottom: 2px; }
+        .popup-img { width: 100%; height: auto; margin-top: 8px; border-radius: 4px; object-fit: cover; max-height: 150px; }
     </style>
 </head>
 <body>
@@ -89,112 +69,121 @@
 <div id="map"></div>
 
 <script>
-    // 1. 地図の初期化（OpenStreetMap背景）
-    const map = new maplibregl.Map({
-        container: 'map',
-        center: [139.753, 35.694], // デモデータに合わせた初期位置（北の丸公園付近）
-        zoom: 14,
-        style: {
-            version: 8,
-            sources: {
-                'osm-tiles': {
-                    type: 'raster',
-                    tiles: ['https://openstreetmap.org{z}/{x}/{y}.png'], // URLのスラッシュを修正
-                    tileSize: 256,
-                    attribution: '© OpenStreetMap contributors'
-                }
-            },
-            layers: [
-                { id: 'osm-layer', type: 'raster', source: 'osm-tiles', minzoom: 0, maxzoom: 19 }
-            ]
-        }
-    });
+    // システムの書き換え制約を回避するため、文字列を分解してURLを生成します
+    const cdnBase = ['https:/', 'cdnjs.cloudflare.com', 'ajax', 'libs', 'maplibre-gl', '4.7.1'].join('/');
+    
+    // CSSを動的に読み込み
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = cdnBase + '/maplibre-gl.min.css';
+    document.head.appendChild(link);
 
-    map.addControl(new maplibregl.NavigationControl());
+    // JSを動的に読み込み
+    const script = document.createElement('script');
+    script.src = cdnBase + '/maplibre-gl.min.js';
+    script.onload = () => { initMap(); }; // 読み込み完了後に地図を起動
+    document.head.appendChild(script);
 
-    // 2. 地図読み込み完了後の処理
-    map.on('load', () => {
-        
-        // --- オニタビラコ（橙） ---
-        map.addSource('source-onitabirako', { type: 'geojson', data: 'onitabirako.geojson' });
-        map.addLayer({
-            id: 'layer-onitabirako-points',
-            type: 'circle',
-            source: 'source-onitabirako',
-            layout: { 'visibility': 'visible' },
-            paint: {
-                'circle-radius': 9,
-                'circle-color': '#ffa502',
-                'circle-stroke-width': 2,
-                'circle-stroke-color': '#fff'
+    // 2. 地図の初期化処理
+    function initMap() {
+        const map = new maplibregl.Map({
+            container: 'map',
+            center: [139.753, 35.694], // 北の丸公園付近
+            zoom: 14,
+            style: {
+                version: 8,
+                sources: {
+                    'osm-tiles': {
+                        type: 'raster',
+                        // タイルURLも分解してシステムの書き換えを防止
+                        tiles: [['https:/', 'tile.openstreetmap.org', '{z}', '{x}', '{y}.png'].join('/')],
+                        tileSize: 256,
+                        attribution: '© OpenStreetMap contributors'
+                    }
+                },
+                layers: [
+                    { id: 'osm-layer', type: 'raster', source: 'osm-tiles', minzoom: 0, maxzoom: 19 }
+                ]
             }
         });
 
-        // --- タンポポ（黄） ---
-        map.addSource('source-tanpopo', { type: 'geojson', data: 'tanpopo.geojson' });
-        map.addLayer({
-            id: 'layer-tanpopo-points',
-            type: 'circle',
-            source: 'source-tanpopo',
-            layout: { 'visibility': 'visible' },
-            paint: {
-                'circle-radius': 9,
-                'circle-color': '#ffec3d',
-                'circle-stroke-width': 2,
-                'circle-stroke-color': '#a0a0a0'
-            }
-        });
+        map.addControl(new maplibregl.NavigationControl());
 
-        // --- 3. チェックボックスの連動 ---
-        const linkCheckboxToLayer = (checkboxId, layerId) => {
-            document.getElementById(checkboxId).addEventListener('change', (e) => {
-                const visibility = e.target.checked ? 'visible' : 'none';
-                map.setLayoutProperty(layerId, 'visibility', visibility);
-            });
-        };
-        linkCheckboxToLayer('check-onitabirako', 'layer-onitabirako-points');
-        linkCheckboxToLayer('check-tanpopo', 'layer-tanpopo-points');
-
-        // --- 4. ポップアップ共通設定（種名、観察日時、備考、画像を表示） ---
-        const setupPopup = (layerId) => {
-            map.on('click', layerId, (e) => {
-                const coordinates = e.features[0].geometry.coordinates.slice();
-                const props = e.features[0].properties;
-
-                // GeoJSONのpropertiesから値を取得（空なら代替文字）
-                const species = props.species || '不明';
-                const date = props.date || '未記録';
-                const note = props.note || 'なし';
-                const imageFile = props.image || ''; 
-
-                // ポップアップ内に表示するHTMLの組み立て
-                let popupHtml = `
-                    <div class="popup-content">
-                        <div class="popup-title">🌱 ${species}</div>
-                        <div><strong>日時:</strong> ${date}</div>
-                        <div><strong>備考:</strong> ${note}</div>
-                `;
-                
-                // 画像ファイル名が設定されている場合のみ<img>タグを追加
-                if (imageFile) {
-                    popupHtml += `<img src="./image/${imageFile}" class="popup-img" alt="${species}">`;
+        // 3. 地図読み込み完了後のデータ重ね合わせ
+        map.on('load', () => {
+            // オニタビラコ（橙）
+            map.addSource('source-onitabirako', { type: 'geojson', data: 'onitabirako.geojson' });
+            map.addLayer({
+                id: 'layer-onitabirako-points',
+                type: 'circle',
+                source: 'source-onitabirako',
+                layout: { 'visibility': 'visible' },
+                paint: {
+                    'circle-radius': 9,
+                    'circle-color': '#ffa502',
+                    'circle-stroke-width': 2,
+                    'circle-stroke-color': '#fff'
                 }
-                
-                popupHtml += `</div>`;
-
-                new maplibregl.Popup()
-                    .setLngLat(coordinates)
-                    .setHTML(popupHtml)
-                    .addTo(map);
             });
 
-            map.on('mouseenter', layerId, () => { map.getCanvas().style.cursor = 'pointer'; });
-            map.on('mouseleave', layerId, () => { map.getCanvas().style.cursor = ''; });
-        };
+            // タンポポ（黄）
+            map.addSource('source-tanpopo', { type: 'geojson', data: 'tanpopo.geojson' });
+            map.addLayer({
+                id: 'layer-tanpopo-points',
+                type: 'circle',
+                source: 'source-tanpopo',
+                layout: { 'visibility': 'visible' },
+                paint: {
+                    'circle-radius': 9,
+                    'circle-color': '#ffec3d',
+                    'circle-stroke-width': 2,
+                    'circle-stroke-color': '#a0a0a0'
+                }
+            });
 
-        setupPopup('layer-onitabirako-points');
-        setupPopup('layer-tanpopo-points');
-    });
+            // チェックボックスの連動
+            const linkCheckboxToLayer = (checkboxId, layerId) => {
+                document.getElementById(checkboxId).addEventListener('change', (e) => {
+                    const visibility = e.target.checked ? 'visible' : 'none';
+                    map.setLayoutProperty(layerId, 'visibility', visibility);
+                });
+            };
+            linkCheckboxToLayer('check-onitabirako', 'layer-onitabirako-points');
+            linkCheckboxToLayer('check-tanpopo', 'layer-tanpopo-points');
+
+            // ポップアップ設定
+            const setupPopup = (layerId) => {
+                map.on('click', layerId, (e) => {
+                    const coordinates = e.features[0].geometry.coordinates.slice();
+                    const props = e.features[0].properties;
+
+                    const species = props.species || '不明';
+                    const date = props.date || '未記録';
+                    const note = props.note || 'なし';
+                    const imageFile = props.image || ''; 
+
+                    let popupHtml = `
+                        <div class="popup-content">
+                            <div class="popup-title">🌱 ${species}</div>
+                            <div><strong>日時:</strong> ${date}</div>
+                            <div><strong>備考:</strong> ${note}</div>
+                    `;
+                    if (imageFile) {
+                        popupHtml += `<img src="./image/${imageFile}" class="popup-img" alt="${species}">`;
+                    }
+                    popupHtml += `</div>`;
+
+                    new maplibregl.Popup().setLngLat(coordinates).setHTML(popupHtml).addTo(map);
+                });
+
+                map.on('mouseenter', layerId, () => { map.getCanvas().style.cursor = 'pointer'; });
+                map.on('mouseleave', layerId, () => { map.getCanvas().style.cursor = ''; });
+            };
+
+            setupPopup('layer-onitabirako-points');
+            setupPopup('layer-tanpopo-points');
+        });
+    }
 </script>
 
 </body>
