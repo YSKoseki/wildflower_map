@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>大学周辺野の花マップ</title>
+    <title>植物観察マップ</title>
     <style>
         body { margin: 0; padding: 0; font-family: sans-serif; }
         #map { position: absolute; top: 0; bottom: 0; width: 100%; }
@@ -40,6 +40,11 @@
             height: 12px;
             border-radius: 50%;
             margin-right: 6px;
+        }
+
+        /* 背景をグレーにするためのCSSフィルター設定 */
+        .map-grayscale .maplibregl-canvas-container canvas {
+            filter: grayscale(100%) opacity(0.8) !important;
         }
 
         /* ポップアップ内のカスタムスタイル */
@@ -116,11 +121,9 @@
 
         map.addControl(new maplibregl.NavigationControl());
 
-        // ★背景の色彩設定（チェックボックス連動）
+        // 背景の色彩設定（チェックボックス連動）
         document.getElementById('check-grayscale').addEventListener('change', (e) => {
-            // チェックONなら彩度を-1（完全な白黒）に、OFFなら0（通常カラー）にする
             const saturationValue = e.target.checked ? -1 : 0;
-            // 背景レイヤのカラー彩度プロパティを書き換え
             map.setPaintProperty('osm-layer', 'raster-saturation', saturationValue);
         });
 
@@ -168,8 +171,9 @@
             // ポップアップ設定
             const setupPopup = (layerId) => {
                 map.on('click', layerId, (e) => {
-                    const coordinates = e.features.geometry.coordinates.slice();
-                    const props = e.features.properties;
+                    // ★【修正】配列の最初の要素を指定するように書き換えました
+                    const coordinates = e.features[0].geometry.coordinates.slice();
+                    const props = e.features[0].properties;
 
                     const species = props.species || '不明';
                     const date = props.date || '未記録';
