@@ -19,7 +19,6 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.3);
             z-index: 1;
             font-size: 14px;
-            max-height: 80vh;
             overflow: hidden;
         }
 
@@ -84,18 +83,31 @@
         .menu-item {
             display: flex;
             align-items: center;
+            gap: 6px;
             margin-bottom: 6px;
             cursor: pointer;
         }
         
-        .menu-item input { margin-right: 8px; }
+        .menu-item input {
+            margin:0;
+            flex-shrink:0;
+        }
+
+        .menu-item span:last-child{
+            flex:1;
+        }
+
+        .menu-footer {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid #ddd;
+        }
         
         .color-badge {
             display: inline-block;
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            margin-right: 6px;
         }
 
         /* 背景グレー化のアイコン */
@@ -107,11 +119,6 @@
             background-color: #e0e0e0; /* 内側の薄いグレー */
             border-radius: 2px; /* 少しだけ角を丸く（完全な四角なら0に） */
             margin-right: 6px;
-        }
-
-        /* 背景をグレーにするためのCSSフィルター設定 */
-        .map-grayscale .maplibregl-canvas-container canvas {
-            filter: grayscale(100%) opacity(0.8) !important;
         }
 
         /* ポップアップ内のカスタムスタイル */
@@ -131,6 +138,8 @@
             野の花マップ
         </div>
     </div>
+
+    <!-- 折りたたまれる部分 -->
     <div id="menu-content">
         <label class="menu-item">
             <input type="checkbox" id="check-onitabirako" checked>
@@ -143,96 +152,90 @@
             タンポポ
         </label>
         <label class="menu-item">
-            <input type="checkbox" id="check-tanpopo" checked>
+            <input type="checkbox" id="check-tanpopo1" checked>
             <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
             タンポポ
         </label>
         <label class="menu-item">
-            <input type="checkbox" id="check-tanpopo" checked>
+            <input type="checkbox" id="check-tanpopo2" checked>
             <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
             タンポポ
         </label>
         <label class="menu-item">
-            <input type="checkbox" id="check-tanpopo" checked>
+            <input type="checkbox" id="check-tanpopo3" checked>
             <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
             タンポポ
         </label>
         <label class="menu-item">
-            <input type="checkbox" id="check-tanpopo" checked>
+            <input type="checkbox" id="check-tanpopo4" checked>
             <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
             タンポポ
         </label>
         <label class="menu-item">
-            <input type="checkbox" id="check-tanpopo" checked>
+            <input type="checkbox" id="check-tanpopo5" checked>
             <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
             タンポポ
         </label>
         <label class="menu-item">
-            <input type="checkbox" id="check-tanpopo" checked>
+            <input type="checkbox" id="check-tanpopo6" checked>
             <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
             タンポポ
         </label>
         <label class="menu-item">
-            <input type="checkbox" id="check-tanpopo" checked>
+            <input type="checkbox" id="check-tanpopo7" checked>
             <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
             タンポポ
         </label>
         <label class="menu-item">
-            <input type="checkbox" id="check-tanpopo" checked>
+            <input type="checkbox" id="check-tanpopo8" checked>
             <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
             タンポポ
         </label>
         <label class="menu-item">
-            <input type="checkbox" id="check-tanpopo" checked>
+            <input type="checkbox" id="check-tanpopo9" checked>
             <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
             タンポポ
         </label>
         <label class="menu-item">
-            <input type="checkbox" id="check-tanpopo" checked>
+            <input type="checkbox" id="check-tanpopo10" checked>
             <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
             タンポポ
         </label>
         <label class="menu-item">
-            <input type="checkbox" id="check-tanpopo" checked>
+            <input type="checkbox" id="check-tanpopo11" checked>
             <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
             タンポポ
         </label>
         <label class="menu-item">
-            <input type="checkbox" id="check-tanpopo" checked>
+            <input type="checkbox" id="check-tanpopo12" checked>
             <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
             タンポポ
         </label>
         <label class="menu-item">
-            <input type="checkbox" id="check-tanpopo" checked>
+            <input type="checkbox" id="check-tanpopo13" checked>
             <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
             タンポポ
         </label>
         <label class="menu-item">
-            <input type="checkbox" id="check-tanpopo" checked>
+            <input type="checkbox" id="check-tanpopo14" checked>
             <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
             タンポポ
         </label>
         <label class="menu-item">
-            <input type="checkbox" id="check-tanpopo" checked>
+            <input type="checkbox" id="check-tanpopo15" checked>
             <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
             タンポポ
         </label>
         <label class="menu-item">
-            <input type="checkbox" id="check-tanpopo" checked>
+            <input type="checkbox" id="check-tanpopo16" checked>
             <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
             タンポポ
         </label>
+    </div>
+
+    <!-- 常に表示 -->
+    <div class="menu-footer">
         <label class="menu-item">
-            <input type="checkbox" id="check-tanpopo" checked>
-            <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
-            タンポポ
-        </label>
-        <label class="menu-item">
-            <input type="checkbox" id="check-tanpopo" checked>
-            <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
-            タンポポ
-        </label>
-        <label class="menu-item" style="margin-top:10px;padding-top:6px;border-top:1px solid #ddd;">
             <input type="checkbox" id="check-grayscale">
             <span class="gray-square-icon"></span>
             グレー地図
@@ -266,7 +269,7 @@
         let isOpen = true;
         menuToggle.addEventListener("click", () => {
             isOpen = !isOpen;
-            menuContent.style.display = isOpen ? "block" : "none";
+            menuContent.classList.toggle("collapsed");
             menuToggle.textContent = isOpen ? "✕" : "☰";
         });
         
@@ -332,14 +335,24 @@
             });
 
             // 植物レイヤ表示切り替え
-            const linkCheckboxToLayer = (checkboxId, layerId) => {
-                document.getElementById(checkboxId).addEventListener('change', (e) => {
-                    const visibility = e.target.checked ? 'visible' : 'none';
-                    map.setLayoutProperty(layerId, 'visibility', visibility);
-                });
-            };
-            linkCheckboxToLayer('check-onitabirako', 'layer-onitabirako-points');
-            linkCheckboxToLayer('check-tanpopo', 'layer-tanpopo-points');
+            document.querySelectorAll('input[id^="check-"]').forEach((checkbox) => {
+                // グレー地図は除外
+                if (checkbox.id === "check-grayscale") return;
+                // check- を取り除く
+                const flower = checkbox.id.replace("check-", "");
+                // レイヤー名を組み立てる
+                const layerId = `layer-${flower}-points`;
+                // レイヤーが存在するときだけイベント登録
+                if (map.getLayer(layerId)) {
+                    checkbox.addEventListener("change", (e) => {
+                        map.setLayoutProperty(
+                            layerId,
+                            "visibility",
+                            e.target.checked ? "visible" : "none"
+                        );
+                    });
+                }
+            });
 
             // ポップアップ設定
             const setupPopup = (layerId) => {
