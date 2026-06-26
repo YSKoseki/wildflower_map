@@ -20,18 +20,57 @@
             z-index: 1;
             font-size: 14px;
         }
-        .menu-title {
-            margin: 0 0 8px 0;
-            font-weight: bold;
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 4px;
+
+        /* メニューヘッダー */
+        .menu-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 8px;
         }
+
+        /* ハンバーガーボタン */
+        #menu-toggle {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: transparent;
+            font-size: 22px;
+            line-height: 32px;
+            cursor: pointer;
+            padding: 0;
+            flex-shrink: 0;
+        }
+
+        #menu-toggle:hover {
+            background: rgba(0,0,0,0.08);
+            border-radius: 4px;
+        }
+        
+        /* タイトル */
+        .menu-title {
+            margin: 0;
+            font-weight: bold;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        /* 開閉部分 */
+        #menu-content {
+            display: block;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 2px solid #ddd;
+        }
+
+        /* メニュー項目 */
         .menu-item {
             display: flex;
             align-items: center;
             margin-bottom: 6px;
             cursor: pointer;
         }
+        
         .menu-item input { margin-right: 8px; }
         
         .color-badge {
@@ -68,24 +107,30 @@
 
 <!-- 切り替えメニュー -->
 <div class="menu-container">
-    <div class="menu-title">大妻女子大学周辺<br>野の花マップ</div>
-    <label class="menu-item">
-        <input type="checkbox" id="check-onitabirako" checked>
-        <span class="color-badge" style="background: #ffa502;"></span>
-        オニタビラコ
-    </label>
-    <label class="menu-item">
-        <input type="checkbox" id="check-tanpopo" checked>
-        <span class="color-badge" style="background: #ffec3d; border: 1px solid #ccc;"></span>
-        タンポポ
-    </label>
-    
-    <!-- 背景グレー化のスイッチ -->
-    <label class="menu-item" style="margin-top: 10px; padding-top: 6px; border-top: 1px solid #ddd;">
-        <input type="checkbox" id="check-grayscale">
-        <span class="gray-square-icon"></span>
-        グレー背景
-    </label>
+    <div class="menu-header">
+        <button id="menu-toggle" aria-label="メニュー">✕</button>
+        <div class="menu-title">
+            大妻女子大学周辺<br>
+            野の花マップ
+        </div>
+    </div>
+    <div id="menu-content">
+        <label class="menu-item">
+            <input type="checkbox" id="check-onitabirako" checked>
+            <span class="color-badge" style="background:#ffa502;"></span>
+            オニタビラコ
+        </label>
+        <label class="menu-item">
+            <input type="checkbox" id="check-tanpopo" checked>
+            <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
+            タンポポ
+        </label>
+        <label class="menu-item" style="margin-top:10px;padding-top:6px;border-top:1px solid #ddd;">
+            <input type="checkbox" id="check-grayscale">
+            <span class="gray-square-icon"></span>
+            グレー背景
+        </label>
+    </div>
 </div>
 
 <div id="map"></div>
@@ -108,9 +153,18 @@
     document.head.appendChild(script);
 
     function initMap() {
+        // メニュー開閉
+        const menuToggle = document.getElementById("menu-toggle");
+        const menuContent = document.getElementById("menu-content");
+        let isOpen = true;
+        menuToggle.addEventListener("click", () => {
+            isOpen = !isOpen;
+            menuContent.style.display = isOpen ? "block" : "none";
+            menuToggle.textContent = isOpen ? "✕" : "☰";
+        });
+        
         const osmDomain = ['t', 'i', 'l', 'e', '.', 'o', 'p', 'e', 'n', 's', 't', 'r', 'e', 'e', 't', 'm', 'a', 'p', '.', 'o', 'r', 'g'].join('');
         const osmUrl = protocol + osmDomain + '/{z}/{x}/{y}.png';
-
         const map = new maplibregl.Map({
             container: 'map',
             center: [139.753, 35.694],
