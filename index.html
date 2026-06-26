@@ -19,6 +19,8 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.3);
             z-index: 1;
             font-size: 14px;
+            max-height: 80vh;
+            overflow: hidden;
         }
 
         /* メニューヘッダー */
@@ -57,10 +59,25 @@
 
         /* 開閉部分 */
         #menu-content {
-            display: block;
             margin-top: 8px;
             padding-top: 8px;
             border-top: 2px solid #ddd;
+            overflow-y: auto;
+            max-height: 60vh;
+            scrollbar-gutter: stable;
+            opacity: 1;
+            transition:
+                max-height .25s ease,
+                opacity .25s ease;
+        }
+
+        #menu-content.collapsed {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
         }
 
         /* メニュー項目 */
