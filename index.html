@@ -42,6 +42,17 @@
             margin-right: 6px;
         }
 
+        /* 背景グレー化のアイコン */
+        .gray-square-icon {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 1px solid #777777; /* グレーの枠線 */
+            background-color: #e0e0e0; /* 内側の薄いグレー */
+            border-radius: 2px; /* 少しだけ角を丸く（完全な四角なら0に） */
+            margin-right: 6px;
+        }
+
         /* 背景をグレーにするためのCSSフィルター設定 */
         .map-grayscale .maplibregl-canvas-container canvas {
             filter: grayscale(100%) opacity(0.8) !important;
@@ -72,7 +83,8 @@
     <!-- 背景グレー化のスイッチ -->
     <label class="menu-item" style="margin-top: 10px; padding-top: 6px; border-top: 1px solid #ddd;">
         <input type="checkbox" id="check-grayscale">
-        🗺️ グレー背景
+        <span class="gray-square-icon"></span>
+        グレー背景
     </label>
 </div>
 
