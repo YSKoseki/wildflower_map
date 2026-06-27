@@ -61,22 +61,23 @@
             margin-top: 8px;
             padding-top: 8px;
             border-top: 2px solid #ddd;
-            overflow-y: auto;
             max-height: 40vh;
+            overflow-y: hidden;
             scrollbar-gutter: stable;
             opacity: 1;
             transition:
-                max-height .25s ease,
-                opacity .25s ease;
+                max-height .4s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                opacity .2s ease, 
+                padding 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
         #menu-content.collapsed {
             max-height: 0;
             opacity: 0;
-            overflow: hidden;
             margin-top: 0;
             padding-top: 0;
             border-top: none;
+            overflow: hidden;
         }
 
         /* メニュー項目 */
