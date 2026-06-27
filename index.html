@@ -172,23 +172,22 @@
         mapCenter: [139.7437, 35.6897],
         zoom: 16
     };
-    
-    const link = document.createElement('link');
+
+   // CSS
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = CONFIG.cdnBase + '/maplibre-gl.min.css';
     document.head.appendChild(link);
 
+    // JS
     const script = document.createElement('script');
     script.src = CONFIG.cdnBase + '/maplibre-gl.min.js';
+    
     script.onload = () => initMap();
+    script.onerror = (e) => console.error("MapLibre load failed", e);
+    
     document.head.appendChild(script);
     document.head.appendChild(link);
-    
-    const script = document.createElement('script');
-    script.src = cdnBase + '/maplibre-gl.min.js';
-    script.onload = () => { initMap(); };
-    document.head.appendChild(script);
 
     function initMap() {
         // メニュー開閉
