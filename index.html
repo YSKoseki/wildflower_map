@@ -167,7 +167,7 @@
 
 <script>
     const CONFIG = {
-        cdnBase: 'https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1',
+        cdnBase: 'https://cdn.jsdelivr.net/npm/maplibre-gl',
         osmTile: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
         mapCenter: [139.7437, 35.6897],
         zoom: 16
@@ -187,7 +187,6 @@
     script.onerror = (e) => console.error("MapLibre load failed", e);
     
     document.head.appendChild(script);
-    document.head.appendChild(link);
 
     function initMap() {
         // メニュー開閉
