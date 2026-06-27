@@ -167,25 +167,28 @@
 
 <script>
     const CONFIG = {
-        cdnBase: 'https://cdn.jsdelivr.net/npm/maplibre-gl',
+        cdnBase: 'https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist',
         osmTile: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
         mapCenter: [139.7437, 35.6897],
         zoom: 16
     };
 
-   // CSS
+    // CSS
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = CONFIG.cdnBase + '/maplibre-gl.min.css';
+    link.href = CONFIG.cdnBase + '/maplibre-gl.css';
     document.head.appendChild(link);
 
     // JS
     const script = document.createElement('script');
-    script.src = CONFIG.cdnBase + '/maplibre-gl.min.js';
-    
+    script.src = CONFIG.cdnBase + '/maplibre-gl.js';
+
     script.onload = () => initMap();
-    script.onerror = (e) => console.error("MapLibre load failed", e);
-    
+    script.onerror = (e) => {
+        console.error("MapLibre load failed", e);
+        console.error("URL:", script.src);
+    };
+
     document.head.appendChild(script);
 
     function initMap() {
