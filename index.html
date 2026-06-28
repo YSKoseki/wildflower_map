@@ -282,7 +282,7 @@
 
         // ポイントデータ描画
         map.on('load', () => {
-            // オニタビラコ
+            // オニタビラコレイヤ
             map.addSource('source-onitabirako', { type: 'geojson', data: 'onitabirako.geojson' });
             map.addLayer({
                 id: 'layer-onitabirako-points',
@@ -296,7 +296,7 @@
                     'circle-stroke-color': '#fff'
                 }
             });
-            // タンポポ
+            // タンポポレイヤ
             map.addSource('source-tanpopo', { type: 'geojson', data: 'tanpopo.geojson' });
             map.addLayer({
                 id: 'layer-tanpopo-points',
