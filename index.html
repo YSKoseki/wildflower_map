@@ -78,7 +78,7 @@
             overflow: hidden;
         }
 
-        /* 科折りたたみ＋インデント /*
+        /* 科折りたたみ＋インデント */
         .family-children {
             margin-left: 18px;
             overflow: hidden;
@@ -89,6 +89,7 @@
         .family-children.collapsed {
             max-height: 0;
             opacity: 0;
+            overflow: hidden;
         }
         .family-header {
             cursor: pointer;
@@ -164,21 +165,23 @@
     </div>
 
     <!-- 折りたたまれる部分 -->
-    <div class="menu-item family-header" data-family="asteraceae">
-        <span class="family-toggle">▼</span>
-        <input type="checkbox" class="family-checkbox" data-family="asteraceae">
-        <span><strong>キク科</strong></span>
-    </div>
-    <div class="family-children collapsed" data-family="asteraceae">
-        <div class="menu-item child">
-            <input type="checkbox" id="check-onitabirako" data-family="asteraceae" checked>
-            <span class="color-badge" style="background:#ffa502;"></span>
-            <span>オニタビラコ</span>
+    <div id="menu-content">
+        <div class="menu-item family-header" data-family="asteraceae">
+            <span class="family-toggle">▼</span>
+            <input type="checkbox" class="family-checkbox" data-family="asteraceae">
+            <span><strong>キク科</strong></span>
         </div>
-        <div class="menu-item child">
-            <input type="checkbox" id="check-tanpopo" data-family="asteraceae" checked>
-            <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
-            <span>タンポポ</span>
+        <div class="family-children collapsed" data-family="asteraceae">
+            <div class="menu-item child">
+                <input type="checkbox" id="check-onitabirako" data-family="asteraceae" checked>
+                <span class="color-badge" style="background:#ffa502;"></span>
+                <span>オニタビラコ</span>
+            </div>
+            <div class="menu-item child">
+                <input type="checkbox" id="check-tanpopo" data-family="asteraceae" checked>
+                <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
+                <span>タンポポ</span>
+            </div>
         </div>
     </div>
 
