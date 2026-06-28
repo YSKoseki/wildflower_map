@@ -219,7 +219,6 @@
         // JS
         const script = document.createElement('script');
         script.src = CONFIG.cdnBase + '/maplibre-gl.js';
-    
         script.onload = () => initMap();
         script.onerror = (e) => {
             console.error("MapLibre load failed", e);
@@ -258,11 +257,9 @@
             // 科ごとの種数を表示
             document.querySelectorAll('.family-header').forEach(header => {
                 const family = header.dataset.family;
-            
                 const count = document.querySelectorAll(
                     `.family-children[data-family="${family}"] input[type="checkbox"]`
                 ).length;
-            
                 header.querySelector('.species-count').textContent = `（${count}）`;
             });
             
@@ -394,12 +391,10 @@
                         // ★【修正】配列の最初の要素を指定するように書き換えました
                         const coordinates = e.features[0].geometry.coordinates.slice();
                         const props = e.features[0].properties;
-    
                         const species = props.species || '不明';
                         const date = props.date || '未記録';
                         const note = props.note || 'なし';
                         const imageFile = props.image || ''; 
-    
                         let popupHtml = `
                             <div class="popup-content">
                                 <div class="popup-title">🌱 ${species}</div>
@@ -410,14 +405,11 @@
                             popupHtml += `<img src="./image/${imageFile}" class="popup-img" alt="${species}">`;
                         }
                         popupHtml += `</div>`;
-    
                         new maplibregl.Popup().setLngLat(coordinates).setHTML(popupHtml).addTo(map);
                     });
-    
                     map.on('mouseenter', layerId, () => { map.getCanvas().style.cursor = 'pointer'; });
                     map.on('mouseleave', layerId, () => { map.getCanvas().style.cursor = ''; });
                 };
-    
                 setupPopup('layer-onitabirako-points');
                 setupPopup('layer-tanpopo-points');
             });
