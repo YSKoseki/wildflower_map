@@ -29,8 +29,16 @@
             gap: 8px;
             margin-bottom: 8px;
         }
-
-        /* ハンバーガーボタン */
+                
+        /* タイトル */
+        .menu-title {
+            margin: 0;
+            font-weight: bold;
+            line-height: 1.4;
+            flex: 1;
+        }
+        
+        /* ハンバーガーボタン表示切り替え */
         #menu-toggle {
             width: 32px;
             height: 32px;
@@ -42,21 +50,12 @@
             padding: 0;
             flex-shrink: 0;
         }
-
         #menu-toggle:hover {
             background: rgba(0,0,0,0.08);
             border-radius: 4px;
         }
-        
-        /* タイトル */
-        .menu-title {
-            margin: 0;
-            font-weight: bold;
-            line-height: 1.4;
-            flex: 1;
-        }
 
-        /* 開閉部分 */
+        /* ハンバーガーメニュー開閉 */
         #menu-content {
             margin-top: 8px;
             padding-top: 8px;
@@ -70,7 +69,6 @@
                 opacity .2s ease, 
                 padding 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-
         #menu-content.collapsed {
             max-height: 0;
             opacity: 0;
@@ -80,6 +78,27 @@
             overflow: hidden;
         }
 
+        /* 科折りたたみ＋インデント /*
+        .family-children {
+            margin-left: 18px;
+            overflow: hidden;
+            max-height: 500px;
+            transition: max-height 0.3s ease, opacity 0.2s ease;
+            opacity: 1;
+        }
+        .family-children.collapsed {
+            max-height: 0;
+            opacity: 0;
+        }
+        .family-header {
+            cursor: pointer;
+            user-select: none;
+        }
+        .family-toggle {
+            width: 16px;
+            display: inline-block;
+        }
+        
         /* メニュー項目 */
         .menu-item {
             display: flex;
@@ -145,11 +164,12 @@
     </div>
 
     <!-- 折りたたまれる部分 -->
-    <div id="menu-content" class="menu-group" data-family="asteraceae">
-        <label class="menu-item">
-            <input type="checkbox" class="family-checkbox" data-family="asteraceae">
-            <span><strong>キク科</strong></span>
-        </label>
+    <div class="menu-item family-header" data-family="asteraceae">
+        <span class="family-toggle">▼</span>
+        <input type="checkbox" class="family-checkbox" data-family="asteraceae">
+        <span><strong>キク科</strong></span>
+    </div>
+    <div class="family-children collapsed" data-family="asteraceae">
         <div class="menu-item child">
             <input type="checkbox" id="check-onitabirako" data-family="asteraceae" checked>
             <span class="color-badge" style="background:#ffa502;"></span>
@@ -201,7 +221,7 @@
     document.head.appendChild(script);
 
     function initMap() {
-        // メニュー開閉
+        // ハンバーガーメニュー開閉
         const menuToggle = document.getElementById("menu-toggle");
         const menuContent = document.getElementById("menu-content");
         let isOpen = true;
@@ -211,6 +231,22 @@
             menuToggle.textContent = isOpen ? "✕" : "☰";
         });
 
+        // 科の開閉（▼トグル）
+        document.querySelectorAll('.family-header').forEach(header => {
+            const family = header.dataset.family;
+            const children = document.querySelector(`.family-children[data-family="${family}"]`);
+            const toggleIcon = header.querySelector('.family-toggle');
+            // 初期状態：折りたたみ
+            children.classList.add('collapsed');
+            toggleIcon.textContent = '▶';
+            header.addEventListener('click', (e) => {
+                // チェックボックスクリックは除外（重要）
+                if (e.target.tagName === 'INPUT') return;
+                const isCollapsed = children.classList.toggle('collapsed');
+                toggleIcon.textContent = isCollapsed ? '▶' : '▼';
+            });
+        });
+        
         // 科（親）と種（子）の同期制御
         const familyStates = new Map();
             // 子 → 親更新
