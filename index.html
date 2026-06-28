@@ -94,6 +94,10 @@
             flex-shrink:0;
         }
 
+        .menu-item.child {
+            padding-left: 18px;
+        }
+        
         .menu-item span:last-child{
             flex:1;
         }
@@ -141,17 +145,21 @@
     </div>
 
     <!-- 折りたたまれる部分 -->
-    <div id="menu-content">
+    <div class="menu-group" data-family="asteraceae">
         <label class="menu-item">
-            <input type="checkbox" id="check-onitabirako" checked>
+            <input type="checkbox" class="family-checkbox" data-family="asteraceae">
+            <span><strong>キク科</strong></span>
+        </label>
+        <div class="menu-item child">
+            <input type="checkbox" id="check-onitabirako" data-family="asteraceae" checked>
             <span class="color-badge" style="background:#ffa502;"></span>
             <span>オニタビラコ</span>
-        </label>
-        <label class="menu-item">
-            <input type="checkbox" id="check-tanpopo" checked>
+        </div>
+        <div class="menu-item child">
+            <input type="checkbox" id="check-tanpopo" data-family="asteraceae" checked>
             <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
             <span>タンポポ</span>
-        </label>
+        </div>
     </div>
 
     <!-- 常に表示 -->
@@ -202,7 +210,48 @@
             menuContent.classList.toggle("collapsed");
             menuToggle.textContent = isOpen ? "✕" : "☰";
         });
-        
+
+        // 科（親）と種（子）の同期制御
+        const familyStates = new Map();
+            // 子 → 親更新
+            function updateFamilyState(family) {
+                const children = document.querySelectorAll(`input[data-family="${family}"]:not(.family-checkbox)`);
+                const parent = document.querySelector(`.family-checkbox[data-family="${family}"]`);
+                const checkedCount = [...children].filter(c => c.checked).length;
+                if (checkedCount === 0) {
+                    parent.checked = false;
+                    parent.indeterminate = false;
+                } else if (checkedCount === children.length) {
+                    parent.checked = true;
+                    parent.indeterminate = false;
+                } else {
+                    parent.checked = false;
+                    parent.indeterminate = true;
+                }
+            }
+            // 親 → 子制御
+            document.querySelectorAll('.family-checkbox').forEach(parent => {
+                parent.addEventListener('change', (e) => {
+                    const family = parent.dataset.family;
+                    const children = document.querySelectorAll(
+                        `input[data-family="${family}"]:not(.family-checkbox)`
+                    );
+                    children.forEach(c => {
+                        c.checked = e.target.checked;
+                        const layerId = `layer-${c.id.replace('check-', '')}-points`;
+                        if (map.getLayer(layerId)) {
+                            map.setLayoutProperty(
+                                layerId,
+                                'visibility',
+                                e.target.checked ? 'visible' : 'none'
+                            );
+                        }
+                    });
+                    updateFamilyState(family);
+                });
+            });
+
+        // マップ制御
         const osmUrl = CONFIG.osmTile;
         const map = new maplibregl.Map({
             container: 'map',
@@ -223,7 +272,6 @@
                 ]
             }
         });
-
         map.addControl(new maplibregl.NavigationControl());
 
         // 背景の色彩設定（チェックボックス連動）
@@ -232,6 +280,7 @@
             map.setPaintProperty('osm-layer', 'raster-saturation', saturationValue);
         });
 
+        // ポイントデータ描画
         map.on('load', () => {
             // オニタビラコ
             map.addSource('source-onitabirako', { type: 'geojson', data: 'onitabirako.geojson' });
@@ -247,7 +296,6 @@
                     'circle-stroke-color': '#fff'
                 }
             });
-
             // タンポポ
             map.addSource('source-tanpopo', { type: 'geojson', data: 'tanpopo.geojson' });
             map.addLayer({
@@ -274,6 +322,8 @@
                 // レイヤーが存在するときだけイベント登録
                 if (map.getLayer(layerId)) {
                     checkbox.addEventListener("change", (e) => {
+                        const family = checkbox.dataset.family;
+                        if (family) updateFamilyState(family);
                         map.setLayoutProperty(
                             layerId,
                             "visibility",
@@ -315,6 +365,9 @@
 
             setupPopup('layer-onitabirako-points');
             setupPopup('layer-tanpopo-points');
+        });
+        document.querySelectorAll('.family-checkbox').forEach(parent => {
+            updateFamilyState(parent.dataset.family);
         });
     }
 </script>
