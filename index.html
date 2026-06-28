@@ -169,7 +169,12 @@
         <div class="menu-item family-header" data-family="asteraceae">
             <span class="family-toggle">▼</span>
             <input type="checkbox" class="family-checkbox" data-family="asteraceae">
-            <span><strong>キク科</strong></span>
+            <span>
+                <strong>
+                    キク科
+                    <span class="species-count"></span>
+                </strong>
+            </span>
         </div>
         <div class="family-children collapsed" data-family="asteraceae">
             <div class="menu-item child">
@@ -248,6 +253,17 @@
                 const isCollapsed = children.classList.toggle('collapsed');
                 toggleIcon.textContent = isCollapsed ? '▶' : '▼';
             });
+        });
+
+        // 科ごとの種数を表示
+        document.querySelectorAll('.family-header').forEach(header => {
+            const family = header.dataset.family;
+        
+            const count = document.querySelectorAll(
+                `.family-children[data-family="${family}"] input[type="checkbox"]`
+            ).length;
+        
+            header.querySelector('.species-count').textContent = `（${count}）`;
         });
         
         // 科（親）と種（子）の同期制御
