@@ -154,277 +154,277 @@
     </style>
 </head>
 <body>
-<!-- 切り替えメニュー -->
-<div class="menu-container">
-    <div class="menu-header">
-        <button id="menu-toggle" aria-label="メニュー">✕</button>
-        <div class="menu-title">
-            大妻女子大学周辺<br>
-            野の花マップ
-        </div>
-    </div>
-
-    <!-- 折りたたまれる部分 -->
-    <div id="menu-content">
-        <div class="menu-item family-header" data-family="asteraceae">
-            <span class="family-toggle">▼</span>
-            <input type="checkbox" class="family-checkbox" data-family="asteraceae">
-            <span>
-                <strong>
-                    キク科
-                    <span class="species-count"></span>
-                </strong>
-            </span>
-        </div>
-        <div class="family-children collapsed" data-family="asteraceae">
-            <div class="menu-item child">
-                <input type="checkbox" id="check-onitabirako" data-family="asteraceae" checked>
-                <span class="color-badge" style="background:#ffa502;"></span>
-                <span>オニタビラコ</span>
-            </div>
-            <div class="menu-item child">
-                <input type="checkbox" id="check-tanpopo" data-family="asteraceae" checked>
-                <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
-                <span>タンポポ</span>
+    <!-- 切り替えメニュー -->
+    <div class="menu-container">
+        <div class="menu-header">
+            <button id="menu-toggle" aria-label="メニュー">✕</button>
+            <div class="menu-title">
+                大妻女子大学周辺<br>
+                野の花マップ
             </div>
         </div>
+    
+        <!-- 折りたたまれる部分 -->
+        <div id="menu-content">
+            <div class="menu-item family-header" data-family="asteraceae">
+                <span class="family-toggle">▼</span>
+                <input type="checkbox" class="family-checkbox" data-family="asteraceae">
+                <span>
+                    <strong>
+                        キク科
+                        <span class="species-count"></span>
+                    </strong>
+                </span>
+            </div>
+            <div class="family-children collapsed" data-family="asteraceae">
+                <div class="menu-item child">
+                    <input type="checkbox" id="check-onitabirako" data-family="asteraceae" checked>
+                    <span class="color-badge" style="background:#ffa502;"></span>
+                    <span>オニタビラコ</span>
+                </div>
+                <div class="menu-item child">
+                    <input type="checkbox" id="check-tanpopo" data-family="asteraceae" checked>
+                    <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
+                    <span>タンポポ</span>
+                </div>
+            </div>
+        </div>
+    
+        <!-- 常に表示 -->
+        <div class="menu-footer">
+            <label class="menu-item">
+                <input type="checkbox" id="check-grayscale">
+                <span class="gray-square-icon"></span>
+                <span>グレー地図</span>
+            </label>
+        </div>
     </div>
-
-    <!-- 常に表示 -->
-    <div class="menu-footer">
-        <label class="menu-item">
-            <input type="checkbox" id="check-grayscale">
-            <span class="gray-square-icon"></span>
-            <span>グレー地図</span>
-        </label>
-    </div>
-</div>
-
-<div id="map"></div>
-
-<script>
-    const CONFIG = {
-        cdnBase: 'https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist',
-        osmTile: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-        mapCenter: [139.7437, 35.6897],
-        zoom: 15
-    };
-
-    // CSS
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = CONFIG.cdnBase + '/maplibre-gl.css';
-    document.head.appendChild(link);
-
-    // JS
-    const script = document.createElement('script');
-    script.src = CONFIG.cdnBase + '/maplibre-gl.js';
-
-    script.onload = () => initMap();
-    script.onerror = (e) => {
-        console.error("MapLibre load failed", e);
-        console.error("URL:", script.src);
-    };
-
-    document.head.appendChild(script);
-
-    function initMap() {
-        // ハンバーガーメニュー開閉
-        const menuToggle = document.getElementById("menu-toggle");
-        const menuContent = document.getElementById("menu-content");
-        let isOpen = true;
-        menuToggle.addEventListener("click", () => {
-            isOpen = !isOpen;
-            menuContent.classList.toggle("collapsed");
-            menuToggle.textContent = isOpen ? "✕" : "☰";
-        });
-
-        // 科の開閉（▼トグル）
-        document.querySelectorAll('.family-header').forEach(header => {
-            const family = header.dataset.family;
-            const children = document.querySelector(`.family-children[data-family="${family}"]`);
-            const toggleIcon = header.querySelector('.family-toggle');
-            // 初期状態：折りたたみ
-            children.classList.add('collapsed');
-            toggleIcon.textContent = '▶';
-            header.addEventListener('click', (e) => {
-                // チェックボックスクリックは除外（重要）
-                if (e.target.tagName === 'INPUT') return;
-                const isCollapsed = children.classList.toggle('collapsed');
-                toggleIcon.textContent = isCollapsed ? '▶' : '▼';
+    
+    <div id="map"></div>
+    
+    <script>
+        const CONFIG = {
+            cdnBase: 'https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist',
+            osmTile: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            mapCenter: [139.7437, 35.6897],
+            zoom: 15
+        };
+    
+        // CSS
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = CONFIG.cdnBase + '/maplibre-gl.css';
+        document.head.appendChild(link);
+    
+        // JS
+        const script = document.createElement('script');
+        script.src = CONFIG.cdnBase + '/maplibre-gl.js';
+    
+        script.onload = () => initMap();
+        script.onerror = (e) => {
+            console.error("MapLibre load failed", e);
+            console.error("URL:", script.src);
+        };
+    
+        document.head.appendChild(script);
+    
+        function initMap() {
+            // ハンバーガーメニュー開閉
+            const menuToggle = document.getElementById("menu-toggle");
+            const menuContent = document.getElementById("menu-content");
+            let isOpen = true;
+            menuToggle.addEventListener("click", () => {
+                isOpen = !isOpen;
+                menuContent.classList.toggle("collapsed");
+                menuToggle.textContent = isOpen ? "✕" : "☰";
             });
-        });
-
-        // 科ごとの種数を表示
-        document.querySelectorAll('.family-header').forEach(header => {
-            const family = header.dataset.family;
-        
-            const count = document.querySelectorAll(
-                `.family-children[data-family="${family}"] input[type="checkbox"]`
-            ).length;
-        
-            header.querySelector('.species-count').textContent = `（${count}）`;
-        });
-        
-        // 科（親）と種（子）の同期制御
-        const familyStates = new Map();
-            // 子 → 親更新
-            function updateFamilyState(family) {
-                const children = document.querySelectorAll(`input[data-family="${family}"]:not(.family-checkbox)`);
-                const parent = document.querySelector(`.family-checkbox[data-family="${family}"]`);
-                const checkedCount = [...children].filter(c => c.checked).length;
-                if (checkedCount === 0) {
-                    parent.checked = false;
-                    parent.indeterminate = false;
-                } else if (checkedCount === children.length) {
-                    parent.checked = true;
-                    parent.indeterminate = false;
-                } else {
-                    parent.checked = false;
-                    parent.indeterminate = true;
+    
+            // 科の開閉（▼トグル）
+            document.querySelectorAll('.family-header').forEach(header => {
+                const family = header.dataset.family;
+                const children = document.querySelector(`.family-children[data-family="${family}"]`);
+                const toggleIcon = header.querySelector('.family-toggle');
+                // 初期状態：折りたたみ
+                children.classList.add('collapsed');
+                toggleIcon.textContent = '▶';
+                header.addEventListener('click', (e) => {
+                    // チェックボックスクリックは除外（重要）
+                    if (e.target.tagName === 'INPUT') return;
+                    const isCollapsed = children.classList.toggle('collapsed');
+                    toggleIcon.textContent = isCollapsed ? '▶' : '▼';
+                });
+            });
+    
+            // 科ごとの種数を表示
+            document.querySelectorAll('.family-header').forEach(header => {
+                const family = header.dataset.family;
+            
+                const count = document.querySelectorAll(
+                    `.family-children[data-family="${family}"] input[type="checkbox"]`
+                ).length;
+            
+                header.querySelector('.species-count').textContent = `（${count}）`;
+            });
+            
+            // 科（親）と種（子）の同期制御
+            const familyStates = new Map();
+                // 子 → 親更新
+                function updateFamilyState(family) {
+                    const children = document.querySelectorAll(`input[data-family="${family}"]:not(.family-checkbox)`);
+                    const parent = document.querySelector(`.family-checkbox[data-family="${family}"]`);
+                    const checkedCount = [...children].filter(c => c.checked).length;
+                    if (checkedCount === 0) {
+                        parent.checked = false;
+                        parent.indeterminate = false;
+                    } else if (checkedCount === children.length) {
+                        parent.checked = true;
+                        parent.indeterminate = false;
+                    } else {
+                        parent.checked = false;
+                        parent.indeterminate = true;
+                    }
                 }
-            }
-            // 親 → 子制御
-            document.querySelectorAll('.family-checkbox').forEach(parent => {
-                parent.addEventListener('change', (e) => {
-                    const family = parent.dataset.family;
-                    const children = document.querySelectorAll(
-                        `input[data-family="${family}"]:not(.family-checkbox)`
-                    );
-                    children.forEach(c => {
-                        c.checked = e.target.checked;
-                        const layerId = `layer-${c.id.replace('check-', '')}-points`;
-                        if (map.getLayer(layerId)) {
+                // 親 → 子制御
+                document.querySelectorAll('.family-checkbox').forEach(parent => {
+                    parent.addEventListener('change', (e) => {
+                        const family = parent.dataset.family;
+                        const children = document.querySelectorAll(
+                            `input[data-family="${family}"]:not(.family-checkbox)`
+                        );
+                        children.forEach(c => {
+                            c.checked = e.target.checked;
+                            const layerId = `layer-${c.id.replace('check-', '')}-points`;
+                            if (map.getLayer(layerId)) {
+                                map.setLayoutProperty(
+                                    layerId,
+                                    'visibility',
+                                    e.target.checked ? 'visible' : 'none'
+                                );
+                            }
+                        });
+                        updateFamilyState(family);
+                    });
+                });
+    
+            // マップ制御
+            const osmUrl = CONFIG.osmTile;
+            const map = new maplibregl.Map({
+                container: 'map',
+                center: CONFIG.mapCenter,
+                zoom: CONFIG.zoom,
+                style: {
+                    version: 8,
+                    sources: {
+                        'osm-tiles': {
+                            type: 'raster',
+                            tiles: [osmUrl],
+                            tileSize: 256,
+                            attribution: '© OpenStreetMap contributors'
+                        }
+                    },
+                    layers: [
+                        { id: 'osm-layer', type: 'raster', source: 'osm-tiles', minzoom: 0, maxzoom: 19 }
+                    ]
+                }
+            });
+            map.addControl(new maplibregl.NavigationControl());
+    
+            // 背景の色彩設定（チェックボックス連動）
+            document.getElementById('check-grayscale').addEventListener('change', (e) => {
+                const saturationValue = e.target.checked ? -1 : 0;
+                map.setPaintProperty('osm-layer', 'raster-saturation', saturationValue);
+            });
+    
+            // ポイントデータ描画
+            map.on('load', () => {
+                // オニタビラコレイヤ
+                map.addSource('source-onitabirako', { type: 'geojson', data: 'onitabirako.geojson' });
+                map.addLayer({
+                    id: 'layer-onitabirako-points',
+                    type: 'circle',
+                    source: 'source-onitabirako',
+                    layout: { 'visibility': 'visible' },
+                    paint: {
+                        'circle-radius': 9,
+                        'circle-color': '#ffa502',
+                        'circle-stroke-width': 2,
+                        'circle-stroke-color': '#fff'
+                    }
+                });
+                // タンポポレイヤ
+                map.addSource('source-tanpopo', { type: 'geojson', data: 'tanpopo.geojson' });
+                map.addLayer({
+                    id: 'layer-tanpopo-points',
+                    type: 'circle',
+                    source: 'source-tanpopo',
+                    layout: { 'visibility': 'visible' },
+                    paint: {
+                        'circle-radius': 9,
+                        'circle-color': '#ffec3d',
+                        'circle-stroke-width': 2,
+                        'circle-stroke-color': '#a0a0a0'
+                    }
+                });
+    
+                // 植物レイヤ表示切り替え
+                document.querySelectorAll('input[id^="check-"]').forEach((checkbox) => {
+                    // グレー地図は除外
+                    if (checkbox.id === "check-grayscale") return;
+                    // check- を取り除く
+                    const flower = checkbox.id.replace("check-", "");
+                    // レイヤー名を組み立てる
+                    const layerId = `layer-${flower}-points`;
+                    // レイヤーが存在するときだけイベント登録
+                    if (map.getLayer(layerId)) {
+                        checkbox.addEventListener("change", (e) => {
+                            const family = checkbox.dataset.family;
+                            if (family) updateFamilyState(family);
                             map.setLayoutProperty(
                                 layerId,
-                                'visibility',
-                                e.target.checked ? 'visible' : 'none'
+                                "visibility",
+                                e.target.checked ? "visible" : "none"
                             );
+                        });
+                    }
+                });
+    
+                // ポップアップ設定
+                const setupPopup = (layerId) => {
+                    map.on('click', layerId, (e) => {
+                        // ★【修正】配列の最初の要素を指定するように書き換えました
+                        const coordinates = e.features[0].geometry.coordinates.slice();
+                        const props = e.features[0].properties;
+    
+                        const species = props.species || '不明';
+                        const date = props.date || '未記録';
+                        const note = props.note || 'なし';
+                        const imageFile = props.image || ''; 
+    
+                        let popupHtml = `
+                            <div class="popup-content">
+                                <div class="popup-title">🌱 ${species}</div>
+                                <div><strong>日時:</strong> ${date}</div>
+                                <div><strong>備考:</strong> ${note}</div>
+                        `;
+                        if (imageFile) {
+                            popupHtml += `<img src="./image/${imageFile}" class="popup-img" alt="${species}">`;
                         }
+                        popupHtml += `</div>`;
+    
+                        new maplibregl.Popup().setLngLat(coordinates).setHTML(popupHtml).addTo(map);
                     });
-                    updateFamilyState(family);
-                });
+    
+                    map.on('mouseenter', layerId, () => { map.getCanvas().style.cursor = 'pointer'; });
+                    map.on('mouseleave', layerId, () => { map.getCanvas().style.cursor = ''; });
+                };
+    
+                setupPopup('layer-onitabirako-points');
+                setupPopup('layer-tanpopo-points');
             });
-
-        // マップ制御
-        const osmUrl = CONFIG.osmTile;
-        const map = new maplibregl.Map({
-            container: 'map',
-            center: CONFIG.mapCenter,
-            zoom: CONFIG.zoom,
-            style: {
-                version: 8,
-                sources: {
-                    'osm-tiles': {
-                        type: 'raster',
-                        tiles: [osmUrl],
-                        tileSize: 256,
-                        attribution: '© OpenStreetMap contributors'
-                    }
-                },
-                layers: [
-                    { id: 'osm-layer', type: 'raster', source: 'osm-tiles', minzoom: 0, maxzoom: 19 }
-                ]
-            }
-        });
-        map.addControl(new maplibregl.NavigationControl());
-
-        // 背景の色彩設定（チェックボックス連動）
-        document.getElementById('check-grayscale').addEventListener('change', (e) => {
-            const saturationValue = e.target.checked ? -1 : 0;
-            map.setPaintProperty('osm-layer', 'raster-saturation', saturationValue);
-        });
-
-        // ポイントデータ描画
-        map.on('load', () => {
-            // オニタビラコレイヤ
-            map.addSource('source-onitabirako', { type: 'geojson', data: 'onitabirako.geojson' });
-            map.addLayer({
-                id: 'layer-onitabirako-points',
-                type: 'circle',
-                source: 'source-onitabirako',
-                layout: { 'visibility': 'visible' },
-                paint: {
-                    'circle-radius': 9,
-                    'circle-color': '#ffa502',
-                    'circle-stroke-width': 2,
-                    'circle-stroke-color': '#fff'
-                }
+            document.querySelectorAll('.family-checkbox').forEach(parent => {
+                updateFamilyState(parent.dataset.family);
             });
-            // タンポポレイヤ
-            map.addSource('source-tanpopo', { type: 'geojson', data: 'tanpopo.geojson' });
-            map.addLayer({
-                id: 'layer-tanpopo-points',
-                type: 'circle',
-                source: 'source-tanpopo',
-                layout: { 'visibility': 'visible' },
-                paint: {
-                    'circle-radius': 9,
-                    'circle-color': '#ffec3d',
-                    'circle-stroke-width': 2,
-                    'circle-stroke-color': '#a0a0a0'
-                }
-            });
-
-            // 植物レイヤ表示切り替え
-            document.querySelectorAll('input[id^="check-"]').forEach((checkbox) => {
-                // グレー地図は除外
-                if (checkbox.id === "check-grayscale") return;
-                // check- を取り除く
-                const flower = checkbox.id.replace("check-", "");
-                // レイヤー名を組み立てる
-                const layerId = `layer-${flower}-points`;
-                // レイヤーが存在するときだけイベント登録
-                if (map.getLayer(layerId)) {
-                    checkbox.addEventListener("change", (e) => {
-                        const family = checkbox.dataset.family;
-                        if (family) updateFamilyState(family);
-                        map.setLayoutProperty(
-                            layerId,
-                            "visibility",
-                            e.target.checked ? "visible" : "none"
-                        );
-                    });
-                }
-            });
-
-            // ポップアップ設定
-            const setupPopup = (layerId) => {
-                map.on('click', layerId, (e) => {
-                    // ★【修正】配列の最初の要素を指定するように書き換えました
-                    const coordinates = e.features[0].geometry.coordinates.slice();
-                    const props = e.features[0].properties;
-
-                    const species = props.species || '不明';
-                    const date = props.date || '未記録';
-                    const note = props.note || 'なし';
-                    const imageFile = props.image || ''; 
-
-                    let popupHtml = `
-                        <div class="popup-content">
-                            <div class="popup-title">🌱 ${species}</div>
-                            <div><strong>日時:</strong> ${date}</div>
-                            <div><strong>備考:</strong> ${note}</div>
-                    `;
-                    if (imageFile) {
-                        popupHtml += `<img src="./image/${imageFile}" class="popup-img" alt="${species}">`;
-                    }
-                    popupHtml += `</div>`;
-
-                    new maplibregl.Popup().setLngLat(coordinates).setHTML(popupHtml).addTo(map);
-                });
-
-                map.on('mouseenter', layerId, () => { map.getCanvas().style.cursor = 'pointer'; });
-                map.on('mouseleave', layerId, () => { map.getCanvas().style.cursor = ''; });
-            };
-
-            setupPopup('layer-onitabirako-points');
-            setupPopup('layer-tanpopo-points');
-        });
-        document.querySelectorAll('.family-checkbox').forEach(parent => {
-            updateFamilyState(parent.dataset.family);
-        });
-    }
-</script>
+        }
+    </script>
 </body>
 </html>
