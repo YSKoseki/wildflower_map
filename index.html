@@ -335,7 +335,7 @@
             // ポイントデータ描画
             map.on('load', () => {
                 // オニタビラコレイヤ
-                map.addSource('source-onitabirako', { type: 'geojson', data: 'onitabirako.geojson' });
+                map.addSource('source-onitabirako', { type: 'geojson', data: 'geojson/onitabirako.geojson' });
                 map.addLayer({
                     id: 'layer-onitabirako-points',
                     type: 'circle',
@@ -349,7 +349,7 @@
                     }
                 });
                 // タンポポレイヤ
-                map.addSource('source-tanpopo', { type: 'geojson', data: 'tanpopo.geojson' });
+                map.addSource('source-tanpopo', { type: 'geojson', data: 'geojson/tanpopo.geojson' });
                 map.addLayer({
                     id: 'layer-tanpopo-points',
                     type: 'circle',
