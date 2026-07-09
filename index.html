@@ -273,6 +273,30 @@
             return html;
         }
 
+        // ポップアップ設定関数
+        function setupPopup(map, plant) {
+            const layerId = `layer-${plant.id}-points`;
+
+            map.on("click", layerId, (e) => {
+                const coordinates = e.features[0].geometry.coordinates.slice();
+                const props = e.features[0].properties;
+                const popupHtml = createPopupHtml(plant, props);
+
+                new maplibregl.Popup()
+                    .setLngLat(coordinates)
+                    .setHTML(popupHtml)
+                    .addTo(map);
+            });
+
+            map.on("mouseenter", layerId, () => {
+                map.getCanvas().style.cursor = "pointer";
+            });
+
+            map.on("mouseleave", layerId, () => {
+                map.getCanvas().style.cursor = "";
+            });
+        }
+
         // マップ設定
         function initMap() {
             // メニューの構築
@@ -437,22 +461,8 @@
                 });
 
                 // ポップアップ設定
-                const setupPopup = (plant) => {
-                    const layerId = `layer-${plant.id}-points`;
-                    map.on('click', layerId, (e) => {
-                        const coordinates = e.features[0].geometry.coordinates.slice();
-                        const props = e.features[0].properties;
-                        const popupHtml = createPopupHtml(plant, props);
-                        new maplibregl.Popup()
-                            .setLngLat(coordinates)
-                            .setHTML(popupHtml)
-                            .addTo(map);
-                    });
-                    map.on('mouseenter', layerId, () => { map.getCanvas().style.cursor = 'pointer'; });
-                    map.on('mouseleave', layerId, () => { map.getCanvas().style.cursor = ''; });
-                };
                 PLANTS.forEach(plant => {
-                    setupPopup(plant);
+                    setupPopup(map, plant);
                 });
             });
             document.querySelectorAll('.family-checkbox').forEach(parent => {
