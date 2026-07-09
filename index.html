@@ -402,21 +402,25 @@
                 const setupPopup = (plant) => {
                     const layerId = `layer-${plant.id}-points`;
                     map.on('click', layerId, (e) => {
-                        // ★【修正】配列の最初の要素を指定するように書き換えました
                         const coordinates = e.features[0].geometry.coordinates.slice();
                         const props = e.features[0].properties;
                         const species = plant.species;
-                        const date = props.date || '未記録';
+                        const datetime = props.datetime || '未記録';
                         const note = props.note || 'なし';
-                        const imageFile = props.image || ''; 
+                        const photId = props.photoId || ''; 
                         let popupHtml = `
                             <div class="popup-content">
                                 <div class="popup-title">🌱 ${species}</div>
-                                <div><strong>日時:</strong> ${date}</div>
+                                <div><strong>日時:</strong> ${datetime}</div>
                                 <div><strong>備考:</strong> ${note}</div>
                         `;
-                        if (imageFile) {
-                            popupHtml += `<img src="./image/${imageFile}" class="popup-img" alt="${species}">`;
+                        if (photoId) {
+                            popupHtml += `
+                                <img
+                                    src="./image/${plant.id}/${photoId}.jpg"
+                                    class="popup-img"
+                                    alt="${species}">
+                            `;
                         }
                         popupHtml += `</div>`;
                         new maplibregl.Popup().setLngLat(coordinates).setHTML(popupHtml).addTo(map);

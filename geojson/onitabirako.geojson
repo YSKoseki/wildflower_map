@@ -9,9 +9,9 @@
       },
       "properties": {
         "species": "オニタビラコ",
-        "date": "2026/05/10 14:30",
+        "datetime": "2026/05/10 14:30",
         "note": "道路のひび割れから元気に生えていました。",
-        "image": "onitabirako/001.jpg"
+        "photoId": "001"
       }
     }
   ]
