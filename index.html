@@ -207,7 +207,46 @@
         ];
         
         // メニューコンテンツの生成
-        function buildMenu() {}
+function buildMenu() {
+    const menu = document.getElementById("menu-content");
+    // 科ごとにまとめる
+    const families = {};
+    PLANTS.forEach(plant => {
+        if (!families[plant.familyId]) {
+            families[plant.familyId] = {
+                name: plant.family,
+                species: []
+            };
+        }
+        families[plant.familyId].species.push(plant);
+    });
+    menu.innerHTML = "";
+    Object.entries(families).forEach(([familyId, family]) => {
+        const group = document.createElement("div");
+        group.innerHTML = `
+            <div class="menu-item family-header" data-family="${familyId}">
+                <span class="family-toggle">▶</span>
+                <input type="checkbox" class="family-checkbox" data-family="${familyId}">
+                <span>
+                    <strong>
+                        ${family.name}
+                        <span class="species-count">（${family.species.length}）</span>
+                    </strong>
+                </span>
+            </div>
+            <div class="family-children collapsed" data-family="${familyId}">
+                ${family.species.map(plant => `
+                    <div class="menu-item child">
+                        <input type="checkbox" id="check-${plant.id}" data-family="${familyId}" checked>
+                        <span class="color-badge" style="background:${plant.color};"></span>
+                        <span>${plant.species}</span>
+                    </div>
+                `).join("")}
+            </div>
+        `;
+        menu.appendChild(group);
+    });
+}
 
         // CSS
         const link = document.createElement('link');
@@ -227,6 +266,9 @@
         document.head.appendChild(script);
     
         function initMap() {
+            // メニューの構築
+            buildMenu();
+
             // ハンバーガーメニュー開閉
             const menuToggle = document.getElementById("menu-toggle");
             const menuContent = document.getElementById("menu-content");
