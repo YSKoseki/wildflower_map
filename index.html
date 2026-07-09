@@ -403,25 +403,20 @@
                 });
     
                 // 植物レイヤ表示切り替え
-                document.querySelectorAll('input[id^="check-"]').forEach((checkbox) => {
-                    // グレー地図は除外
-                    if (checkbox.id === "check-grayscale") return;
-                    // check- を取り除く
-                    const flower = checkbox.id.replace("check-", "");
-                    // レイヤー名を組み立てる
-                    const layerId = `layer-${flower}-points`;
-                    // レイヤーが存在するときだけイベント登録
-                    if (map.getLayer(layerId)) {
-                        checkbox.addEventListener("change", (e) => {
-                            const family = checkbox.dataset.family;
-                            if (family) updateFamilyState(family);
+                PLANTS.forEach(plant => {
+                    const checkbox = document.getElementById(`check-${plant.id}`);
+                    if (!checkbox) return;
+                    const layerId = `layer-${plant.id}-points`;
+                    checkbox.addEventListener("change", e => {
+                        if (map.getLayer(layerId)) {
                             map.setLayoutProperty(
                                 layerId,
                                 "visibility",
                                 e.target.checked ? "visible" : "none"
                             );
-                        });
-                    }
+                        }
+                        updateFamilyState(plant.familyId);
+                    });
                 });
     
                 // ポップアップ設定
