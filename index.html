@@ -248,7 +248,32 @@
         };
     
         document.head.appendChild(script);
-    
+        
+        // ポップアップHTML生成関数
+        function createPopupHtml(plant, props) {
+            const species = plant.species || "不明";
+            const datetime = props.datetime || "未記録";
+            const note = props.note || "なし";
+            const photoId = props.photoId || "";
+            let html = `
+                <div class="popup-content">
+                    <div class="popup-title">🌱 ${species}</div>
+                    <div><strong>日時:</strong> ${datetime}</div>
+                    <div><strong>備考:</strong> ${note}</div>
+            `;
+            if (photoId) {
+                html += `
+                    <img
+                        src="./image/${plant.id}/${photoId}.jpg"
+                        class="popup-img"
+                        alt="${species}">
+                `;
+            }
+            html += `</div>`;
+            return html;
+        }
+
+        // マップ設定
         function initMap() {
             // メニューの構築
             buildMenu();
