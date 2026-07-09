@@ -405,7 +405,7 @@
                         // ★【修正】配列の最初の要素を指定するように書き換えました
                         const coordinates = e.features[0].geometry.coordinates.slice();
                         const props = e.features[0].properties;
-                        const species = props.species || '不明';
+                        const species = plant.species;
                         const date = props.date || '未記録';
                         const note = props.note || 'なし';
                         const imageFile = props.image || ''; 
