@@ -251,7 +251,7 @@
         
         // ポップアップHTML生成関数
         function createPopupHtml(plant, props) {
-            const species = plant.species || "不明";
+            const species = plant.species;
             const datetime = props.datetime || "未記録";
             const note = props.note || "なし";
             const photoId = props.photoId || "";
@@ -429,26 +429,11 @@
                     map.on('click', layerId, (e) => {
                         const coordinates = e.features[0].geometry.coordinates.slice();
                         const props = e.features[0].properties;
-                        const species = plant.species;
-                        const datetime = props.datetime || '未記録';
-                        const note = props.note || 'なし';
-                        const photoId = props.photoId || ''; 
-                        let popupHtml = `
-                            <div class="popup-content">
-                                <div class="popup-title">🌱 ${species}</div>
-                                <div><strong>日時:</strong> ${datetime}</div>
-                                <div><strong>備考:</strong> ${note}</div>
-                        `;
-                        if (photoId) {
-                            popupHtml += `
-                                <img
-                                    src="./image/${plant.id}/${photoId}.jpg"
-                                    class="popup-img"
-                                    alt="${species}">
-                            `;
-                        }
-                        popupHtml += `</div>`;
-                        new maplibregl.Popup().setLngLat(coordinates).setHTML(popupHtml).addTo(map);
+                        const html = createPopupHtml(plant, props);
+                        new maplibregl.Popup()
+                            .setLngLat(coordinates)
+                            .setHTML(popupHtml)
+                            .addTo(map);
                     });
                     map.on('mouseenter', layerId, () => { map.getCanvas().style.cursor = 'pointer'; });
                     map.on('mouseleave', layerId, () => { map.getCanvas().style.cursor = ''; });
