@@ -330,33 +330,26 @@
     
             // 植物ポイントデータ描画
             map.on('load', () => {
-                // オニタビラコレイヤ
-                map.addSource('source-onitabirako', { type: 'geojson', data: 'geojson/onitabirako.geojson' });
-                map.addLayer({
-                    id: 'layer-onitabirako-points',
-                    type: 'circle',
-                    source: 'source-onitabirako',
-                    layout: { 'visibility': 'visible' },
-                    paint: {
-                        'circle-radius': 6,
-                        'circle-color': '#ffa502',
-                        'circle-stroke-width': 1,
-                        'circle-stroke-color': '#ffffff'
-                    }
-                });
-                // タンポポレイヤ
-                map.addSource('source-tanpopo', { type: 'geojson', data: 'geojson/tanpopo.geojson' });
-                map.addLayer({
-                    id: 'layer-tanpopo-points',
-                    type: 'circle',
-                    source: 'source-tanpopo',
-                    layout: { 'visibility': 'visible' },
-                    paint: {
-                        'circle-radius': 6,
-                        'circle-color': '#ffec3d',
-                        'circle-stroke-width': 1,
-                        'circle-stroke-color': '#a0a0a0'
-                    }
+                // GeoJSONソースとレイヤーを追加
+                PLANTS.forEach(plant => {
+                    map.addSource(`source-${plant.id}`, {
+                        type: 'geojson',
+                        data: `geojson/${plant.id}.geojson`
+                    });
+                    map.addLayer({
+                        id: `layer-${plant.id}-points`,
+                        type: 'circle',
+                        source: `source-${plant.id}`,
+                        layout: {
+                            visibility: 'visible'
+                        },
+                        paint: {
+                            'circle-radius': 6,
+                            'circle-color': plant.color,
+                            'circle-stroke-width': 1,
+                            'circle-stroke-color': '#ffffff'
+                        }
+                    });
                 });
     
                 // 植物レイヤ表示切り替え
