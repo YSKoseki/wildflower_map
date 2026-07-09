@@ -449,8 +449,9 @@
                     map.on('mouseenter', layerId, () => { map.getCanvas().style.cursor = 'pointer'; });
                     map.on('mouseleave', layerId, () => { map.getCanvas().style.cursor = ''; });
                 };
-                setupPopup('layer-onitabirako-points');
-                setupPopup('layer-tanpopo-points');
+                PLANTS.forEach(plant => {
+                    setupPopup(`layer-${plant.id}-points`);
+                });
             });
             document.querySelectorAll('.family-checkbox').forEach(parent => {
                 updateFamilyState(parent.dataset.family);
