@@ -193,7 +193,6 @@
         
         // メニューコンテンツの生成
         function buildMenu() {
-            console.log("buildMenu");
             const menu = document.getElementById("menu-content");
             // 科ごとにまとめる
             const families = {};
@@ -206,7 +205,6 @@
                 families[plant.familyId].species.push(plant);
             });
             menu.innerHTML = "";
-            console.log(families);
             Object.entries(families).forEach(([familyId, family]) => {
                 const group = document.createElement("div");
                 group.innerHTML = `
@@ -232,7 +230,6 @@
                 `;
                 menu.appendChild(group);
             });
-            console.log(menu.innerHTML);
         }
 
         // CSS
@@ -255,8 +252,6 @@
         function initMap() {
             // メニューの構築
             buildMenu();
-
-            console.log(document.getElementById("menu-content").innerHTML);
 
             // ハンバーガーメニュー開閉
             const menuToggle = document.getElementById("menu-toggle");
@@ -404,7 +399,8 @@
                 });
     
                 // ポップアップ設定
-                const setupPopup = (layerId) => {
+                const setupPopup = (plant) => {
+                    const layerId = `layer-${plant.id}-points`;
                     map.on('click', layerId, (e) => {
                         // ★【修正】配列の最初の要素を指定するように書き換えました
                         const coordinates = e.features[0].geometry.coordinates.slice();
@@ -429,7 +425,7 @@
                     map.on('mouseleave', layerId, () => { map.getCanvas().style.cursor = ''; });
                 };
                 PLANTS.forEach(plant => {
-                    setupPopup(`layer-${plant.id}-points`);
+                    setupPopup(plant);
                 });
             });
             document.querySelectorAll('.family-checkbox').forEach(parent => {
