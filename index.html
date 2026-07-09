@@ -405,6 +405,25 @@
                 });
             }
 
+            // レイヤ表示切り替えの設定
+            function setupLayerToggle(map, plant) {
+                const checkbox = document.getElementById(`check-${plant.id}`);
+                if (!checkbox) return;
+
+                const layerId = `layer-${plant.id}-points`;
+
+                checkbox.addEventListener("change", e => {
+                    if (map.getLayer(layerId)) {
+                        map.setLayoutProperty(
+                            layerId,
+                            "visibility",
+                            e.target.checked ? "visible" : "none"
+                        );
+                    }
+                    updateFamilyState(plant.familyId);
+                });
+            }
+
             // 植物ポイントデータ描画
             map.on('load', () => {
                 // 植物レイヤ追加
@@ -414,21 +433,9 @@
     
                 // 植物レイヤ表示切り替え
                 PLANTS.forEach(plant => {
-                    const checkbox = document.getElementById(`check-${plant.id}`);
-                    if (!checkbox) return;
-                    const layerId = `layer-${plant.id}-points`;
-                    checkbox.addEventListener("change", e => {
-                        if (map.getLayer(layerId)) {
-                            map.setLayoutProperty(
-                                layerId,
-                                "visibility",
-                                e.target.checked ? "visible" : "none"
-                            );
-                        }
-                        updateFamilyState(plant.familyId);
-                    });
+                    setupLayerToggle(map, plant);
                 });
-    
+
                 // ポップアップ設定
                 const setupPopup = (plant) => {
                     const layerId = `layer-${plant.id}-points`;
