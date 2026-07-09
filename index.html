@@ -165,30 +165,7 @@
         </div>
     
         <!-- 科ごとの植物名リスト：折りたたまれる部分 -->
-        <div id="menu-content">
-            <div class="menu-item family-header" data-family="kiku">
-                <span class="family-toggle">▼</span>
-                <input type="checkbox" class="family-checkbox" data-family="kiku">
-                <span>
-                    <strong>
-                        キク科
-                        <span class="species-count"></span>
-                    </strong>
-                </span>
-            </div>
-            <div class="family-children collapsed" data-family="kiku">
-                <div class="menu-item child">
-                    <input type="checkbox" id="check-onitabirako" data-family="kiku" checked>
-                    <span class="color-badge" style="background:#ffa502;"></span>
-                    <span>オニタビラコ</span>
-                </div>
-                <div class="menu-item child">
-                    <input type="checkbox" id="check-tanpopo" data-family="kiku" checked>
-                    <span class="color-badge" style="background:#ffec3d;border:1px solid #ccc;"></span>
-                    <span>タンポポ</span>
-                </div>
-            </div>
-        </div>
+        <div id="menu-content"></div>
     
         <!-- 常に表示 -->
         <div class="menu-footer">
@@ -203,6 +180,15 @@
     <div id="map"></div>
     
     <script>
+        // 設定値
+        const CONFIG = {
+            cdnBase: 'https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist',
+            osmTile: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            mapCenter: [139.7437, 35.6897],
+            zoom: 15
+        };
+        
+        // 植物データ
         const PLANTS = [
             {
                 id: "onitabirako",
@@ -219,14 +205,7 @@
                 color: "#ffec3d"
             }
         ];
-
-        const CONFIG = {
-            cdnBase: 'https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist',
-            osmTile: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-            mapCenter: [139.7437, 35.6897],
-            zoom: 15
-        };
-    
+        
         // CSS
         const link = document.createElement('link');
         link.rel = 'stylesheet';
