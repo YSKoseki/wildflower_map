@@ -191,24 +191,6 @@
             zoom: 15
         };
         
-        // 植物データ
-        window.PLANTS = [
-            {
-                id: "onitabirako",
-                species: "オニタビラコ",
-                family: "キク科",
-                familyId: "kiku",
-                color: "#ffa502"
-            },
-            {
-                id: "tanpopo",
-                species: "タンポポ",
-                family: "キク科",
-                familyId: "kiku",
-                color: "#ffec3d"
-            }
-        ];
-        
         // メニューコンテンツの生成
         function buildMenu() {
             console.log("buildMenu");
@@ -399,7 +381,7 @@
                             'circle-radius': 6,
                             'circle-color': plant.color,
                             'circle-stroke-width': 1,
-                            'circle-stroke-color': '#ffffff'
+                            'circle-stroke-color': plant.strokeColor
                         }
                     });
                 });
