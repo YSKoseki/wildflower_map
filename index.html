@@ -164,7 +164,7 @@
             </div>
         </div>
     
-        <!-- 折りたたまれる部分 -->
+        <!-- 科ごとの植物名リスト：折りたたまれる部分 -->
         <div id="menu-content">
             <div class="menu-item family-header" data-family="kiku">
                 <span class="family-toggle">▼</span>
@@ -332,7 +332,7 @@
                 map.setPaintProperty('osm-layer', 'raster-saturation', saturationValue);
             });
     
-            // ポイントデータ描画
+            // 植物ポイントデータ描画
             map.on('load', () => {
                 // オニタビラコレイヤ
                 map.addSource('source-onitabirako', { type: 'geojson', data: 'geojson/onitabirako.geojson' });
