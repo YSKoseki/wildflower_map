@@ -181,7 +181,7 @@
     <div id="map"></div>
     
     <script src="plants.js"></script>
-    
+
     <script>
         // 設定値
         const CONFIG = {
@@ -218,7 +218,6 @@
             PLANTS.forEach(plant => {
                 if (!families[plant.familyId]) {
                     families[plant.familyId] = {
-                        name: plant.family,
                         species: []
                     };
                 }
@@ -234,7 +233,7 @@
                         <input type="checkbox" class="family-checkbox" data-family="${familyId}">
                         <span>
                             <strong>
-                                ${family.name}
+                                ${FAMILIES[familyId].name}
                                 <span class="species-count">（${family.species.length}）</span>
                             </strong>
                         </span>
