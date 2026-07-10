@@ -91,13 +91,15 @@ window.PLANTS = [
         id: "onitabirako",
         species: "オニタビラコ",
         color: "#ffa502",
-        strokeColor: "#ffffff"
+        strokeColor: "#ffffff",
+        pointCount: 0
     },
     {
         familyId: FAMILY.KIKU,
         id: "tanpopo",
         species: "タンポポ",
         color: "#ffec3d",
-        strokeColor: "#666666"
+        strokeColor: "#666666",
+        pointCount: 0
     }
 ];

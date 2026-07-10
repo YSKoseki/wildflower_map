@@ -304,24 +304,34 @@ Copyright (c) 2026 Koseki, Yusuke
             });
         }
 
-       // 植物レイヤ追加関数
-        function addPlantLayer(map, plant) {
+        // 植物レイヤ追加関数
+        async function addPlantLayer(map, plant) {
+            // GeoJSONを読み込む
+            const response = await fetch(`geojson/${plant.id}.geojson`);
+            const geojson = await response.json();
+
+            // 地点数を保存
+            plant.pointCount = geojson.features.length;
+
+            // ソース追加
             map.addSource(getSourceId(plant.id), {
-                type: 'geojson',
-                data: `geojson/${plant.id}.geojson`
+                type: "geojson",
+                data: geojson
             });
+
+            // レイヤ追加
             map.addLayer({
                 id: getLayerId(plant.id),
-                type: 'circle',
+                type: "circle",
                 source: getSourceId(plant.id),
                 layout: {
-                    visibility: 'visible'
+                    visibility: "visible"
                 },
                 paint: {
-                    'circle-radius': 6,
-                    'circle-color': plant.color,
-                    'circle-stroke-width': 1,
-                    'circle-stroke-color': plant.strokeColor
+                    "circle-radius": 6,
+                    "circle-color": plant.color,
+                    "circle-stroke-width": 1,
+                    "circle-stroke-color": plant.strokeColor
                 }
             });
         }
@@ -350,16 +360,16 @@ Copyright (c) 2026 Koseki, Yusuke
         }
 
         // 植物レイヤ初期化処理関数（個別）
-        function initializePlantLayer(map, plant) {
-            addPlantLayer(map, plant);
+        async function initializePlantLayer(map, plant) {
+            await addPlantLayer(map, plant);
             setupPlantInteractions(map, plant);
         }
 
         // 植物レイヤ初期化処理関数（まとめて）
-        function setupPlantLayers(map) {
-            PLANTS.forEach(plant => {
-                initializePlantLayer(map, plant);
-            });
+        async function setupPlantLayers(map) {
+            for (const plant of PLANTS) {
+                await initializePlantLayer(map, plant);
+            }
         }
 
          // ハンバーガーメニュー開閉関数
@@ -491,8 +501,8 @@ Copyright (c) 2026 Koseki, Yusuke
         }
 
         // マップロード時の処理
-        function onMapLoad(map) {
-            setupPlantLayers(map);
+        async function onMapLoad(map) {
+            await setupPlantLayers(map);
         }
 
         // マップイベント設定関数
@@ -501,7 +511,7 @@ Copyright (c) 2026 Koseki, Yusuke
                 onMapLoad(map);
             });
         }
-        
+
         // マップ初期化関数
         function initMap() {
             // マップの生成
