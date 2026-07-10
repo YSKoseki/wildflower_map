@@ -529,12 +529,16 @@ Copyright (c) 2026 Koseki, Yusuke
         // マップロード時の処理
         async function onMapLoad(map) {
             await setupPlantLayers(map);
+            // 地点数を反映したメニューへ更新
+            buildMenu();
+            setupFamilyToggle();
+            setupFamilyCheckboxes(map);
         }
 
         // マップイベント設定関数
         function setupMapEvents(map) {
-            map.on("load", () => {
-                onMapLoad(map);
+            map.on("load", async () => {
+                await onMapLoad(map);
             });
         }
 
