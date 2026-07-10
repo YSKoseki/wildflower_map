@@ -55,6 +55,7 @@ Copyright (c) 2026 Koseki, Yusuke
             padding: 0;
             flex-shrink: 0;
         }
+
         #menu-toggle:hover {
             background: rgba(0,0,0,0.08);
             border-radius: 4px;
@@ -74,6 +75,7 @@ Copyright (c) 2026 Koseki, Yusuke
                 opacity .2s ease, 
                 padding 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
+
         #menu-content.collapsed {
             max-height: 0;
             opacity: 0;
@@ -91,15 +93,18 @@ Copyright (c) 2026 Koseki, Yusuke
             transition: max-height 0.3s ease, opacity 0.2s ease;
             opacity: 1;
         }
+
         .family-children.collapsed {
             max-height: 0;
             opacity: 0;
             overflow: hidden;
         }
+
         .family-header {
             cursor: pointer;
             user-select: none;
         }
+
         .family-toggle {
             width: 16px;
             display: inline-block;
@@ -113,7 +118,7 @@ Copyright (c) 2026 Koseki, Yusuke
             margin-bottom: 6px;
             cursor: pointer;
         }
-        
+
         .menu-item input {
             margin:0;
             flex-shrink:0;
@@ -145,7 +150,7 @@ Copyright (c) 2026 Koseki, Yusuke
             display: inline-block;
             width: 12px;
             height: 12px;
-            border: 1px solid #777777; /* グレーの枠線 */
+            border: 1px solid #777; /* グレーの枠線 */
             background-color: #e0e0e0; /* 内側の薄いグレー */
             border-radius: 2px; /* 少しだけ角を丸く（完全な四角なら0に） */
             flex-shrink: 0;
@@ -153,9 +158,28 @@ Copyright (c) 2026 Koseki, Yusuke
         }
 
         /* ポップアップ内のカスタムスタイル */
-        .popup-content { font-size: 13px; line-height: 1.4; max-width: 220px; }
-        .popup-title { font-weight: bold; font-size: 15px; margin-bottom: 6px; border-bottom: 1px solid #ccc; padding-bottom: 2px; }
-        .popup-img { width: 100%; height: auto; margin-top: 8px; border-radius: 4px; object-fit: cover; max-height: 150px; }
+        .popup-content {
+            font-size: 13px;
+            line-height: 1.4;
+            max-width: 220px;
+        }
+        
+        .popup-title {
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 6px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 2px;
+        }
+
+        .popup-img {
+            width: 100%;
+            height: auto;
+            margin-top: 8px;
+            border-radius: 4px;
+            object-fit: cover;
+            max-height: 150px;
+        }
     </style>
 </head>
 <body>
@@ -238,7 +262,9 @@ Copyright (c) 2026 Koseki, Yusuke
                         <div class="menu-item child">
                             <input type="checkbox" id="check-${plant.id}" data-family="${familyId}" checked>
                             <span class="color-badge" style="background:${plant.color};"></span>
-                            <span>${plant.species}</span>
+                            <span>
+                                ${plant.species}（${plant.pointCount ?? 0}）
+                            </span>
                         </div>
                     `).join("")}
                 </div>
@@ -260,7 +286,7 @@ Copyright (c) 2026 Koseki, Yusuke
             });
         }
 
-       // ポップアップHTML生成関数
+        // ポップアップHTML生成関数
         function createPopupHtml(plant, props) {
             const species = plant.species;
             const datetime = props.datetime || "未記録";
@@ -353,7 +379,7 @@ Copyright (c) 2026 Koseki, Yusuke
             });
         }
 
-       // 植物レイヤのインタラクション設定関数
+        // 植物レイヤのインタラクション設定関数
         function setupPlantInteractions(map, plant) {
             setupLayerToggle(map, plant);
             setupPopup(map, plant);
