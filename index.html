@@ -294,7 +294,7 @@ Copyright (c) 2026 Koseki, Yusuke
 
         // ポップアップ設定関数
         function setupPopup(map, plant) {
-            const layerId = `layer-${plant.id}-points`;
+            const layerId = getLayerId(plant);
             map.on("click", layerId, (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const props = e.features[0].properties;
