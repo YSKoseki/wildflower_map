@@ -263,12 +263,27 @@ Copyright (c) 2026 Koseki, Yusuke
                             <input type="checkbox" id="check-${plant.id}" data-family="${familyId}" checked>
                             <span class="color-badge" style="background:${plant.color};"></span>
                             <span>
-                                ${plant.species}（${plant.pointCount ?? 0}）
+                                ${plant.species}
+                                <span id="point-count-${plant.id}">
+                                    （${plant.pointCount ?? 0}）
+                                </span>
                             </span>
                         </div>
                     `).join("")}
                 </div>
             `;
+        }
+
+        // メニューの地点数表示更新関数
+        function updatePointCounts() {
+            PLANTS.forEach(plant => {
+                const pointCount = document.getElementById(
+                    `point-count-${plant.id}`
+                );
+                if (pointCount) {
+                    pointCount.textContent = `（${plant.pointCount ?? 0}）`;
+                }
+            });
         }
 
         // メニューコンテンツ生成関数
@@ -529,16 +544,13 @@ Copyright (c) 2026 Koseki, Yusuke
         // マップロード時の処理
         async function onMapLoad(map) {
             await setupPlantLayers(map);
-            // 地点数を反映したメニューへ更新
-            buildMenu();
-            setupFamilyToggle();
-            setupFamilyCheckboxes(map);
+            updatePointCounts();
         }
 
         // マップイベント設定関数
         function setupMapEvents(map) {
-            map.on("load", async () => {
-                await onMapLoad(map);
+            map.on("load", () => {
+                onMapLoad(map);
             });
         }
 
