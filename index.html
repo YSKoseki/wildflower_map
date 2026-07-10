@@ -417,15 +417,6 @@
             // 科の開閉（▼トグルボタン）
             setupFamilyToggle();
     
-            // 科ごとの種数を表示
-            document.querySelectorAll('.family-header').forEach(header => {
-                const family = header.dataset.family;
-                const count = document.querySelectorAll(
-                    `.family-children[data-family="${family}"] input[type="checkbox"]`
-                ).length;
-                header.querySelector('.species-count').textContent = `（${count}）`;
-            });
-    
             // マップ制御
             const osmUrl = CONFIG.osmTile;
             const map = new maplibregl.Map({
