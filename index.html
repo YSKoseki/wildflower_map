@@ -191,6 +191,21 @@
             zoom: 15
         };
         
+
+        // 植物データを科ごとにまとめる関数
+        function groupPlantsByFamily() {
+            const families = {};
+            PLANTS.forEach(plant => {
+                if (!families[plant.familyId]) {
+                    families[plant.familyId] = {
+                        species: []
+                    };
+                }
+                families[plant.familyId].species.push(plant);
+            });
+            return families;
+        }
+
         // 科ごとのHTML生成関数
         function createFamilyHtml(familyId, family) {
             return `
@@ -220,15 +235,7 @@
         function buildMenu() {
             const menu = document.getElementById("menu-content");
             // 科ごとにまとめる
-            const families = {};
-            PLANTS.forEach(plant => {
-                if (!families[plant.familyId]) {
-                    families[plant.familyId] = {
-                        species: []
-                    };
-                }
-                families[plant.familyId].species.push(plant);
-            });
+            const families = groupPlantsByFamily();
             // HTML文字列を組み立てる
             menu.innerHTML = "";
             // 科ごとにHTMLを生成して追加
