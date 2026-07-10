@@ -295,6 +295,22 @@ Copyright (c) 2026 Koseki, Yusuke
             });
         }
 
+        // メニュー概要更新関数
+        function updateMenuSummary() {
+            // 科数
+            const familyCount = Object.keys(groupPlantsByFamily()).length;
+            // 種数
+            const speciesCount = PLANTS.length;
+            // 地点数
+            const pointCount = PLANTS.reduce(
+                (sum, plant) => sum + (plant.pointCount ?? 0),
+                0
+            );
+            // 表示
+            document.getElementById("menu-summary").textContent =
+                `${familyCount}科・${speciesCount}種・${pointCount}地点`;
+        }        
+
         // メニューコンテンツ生成関数
         function buildMenu() {
             const menu = document.getElementById("menu-content");
