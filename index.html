@@ -496,20 +496,26 @@ Copyright (c) 2026 Koseki, Yusuke
             });
         }
 
-        // マップ設定
-        function initMap() {
+        // メニュー初期化関数
+        function setupMenu(map) {
             // メニューの構築
             buildMenu();
             // メニューの開閉（ハンバーガーボタン）
             setupHamburgerMenu();
             // 科の開閉（▼トグルボタン）
             setupFamilyToggle();
-            // マップの生成
-            const map = createMap();
             // 科（親）と種（子）の状態同期
             setupFamilyCheckboxes(map);
             // グレー地図切り替え
             setupGrayscaleToggle(map);
+        }
+
+        // マップ初期化関数
+        function initMap() {
+            // マップの生成
+            const map = createMap();
+            // メニューの初期化
+            setupMenu(map);
             // 植物ポイントデータの描画
             setupMapEvents(map);
         }
