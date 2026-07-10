@@ -294,7 +294,7 @@ Copyright (c) 2026 Koseki, Yusuke
 
         // ポップアップ設定関数
         function setupPopup(map, plant) {
-            const layerId = getLayerId(plant);
+            const layerId = getLayerId(plant.id);
             map.on("click", layerId, (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const props = e.features[0].properties;
@@ -313,25 +313,25 @@ Copyright (c) 2026 Koseki, Yusuke
         }
 
         // レイヤID生成関数
-        function getLayerId(plant) {
-            return `layer-${plant.id}-points`;
+        function getLayerId(plantId) {
+            return `layer-${plantId}-points`;
         }
 
         // ソースID生成関数
-        function getSourceId(plant) {
-            return `source-${plant.id}`;
+        function getSourceId(plantId) {
+            return `source-${plantId}`;
         }
 
         // 植物レイヤ追加関数
         function addPlantLayer(map, plant) {
-            map.addSource(getSourceId(plant), {
+            map.addSource(getSourceId(plant.id), {
                 type: 'geojson',
                 data: `geojson/${plant.id}.geojson`
             });
             map.addLayer({
-                id: getLayerId(plant),
+                id: getLayerId(plant.id),
                 type: 'circle',
-                source: getSourceId(plant),
+                source: getSourceId(plant.id),
                 layout: {
                     visibility: 'visible'
                 },
@@ -348,7 +348,7 @@ Copyright (c) 2026 Koseki, Yusuke
         function setupLayerToggle(map, plant) {
             const checkbox = document.getElementById(`check-${plant.id}`);
             if (!checkbox) return;
-            const layerId = getLayerId(plant);
+            const layerId = getLayerId(plant.id);
             checkbox.addEventListener("change", e => {
                 if (map.getLayer(layerId)) {
                     map.setLayoutProperty(
@@ -418,7 +418,8 @@ Copyright (c) 2026 Koseki, Yusuke
                     );
                     children.forEach(c => {
                         c.checked = e.target.checked;
-                        const layerId = `layer-${c.id.replace('check-', '')}-points`;
+                        const plantId = c.id.replace("check-", "");
+                        const layerId = getLayerId(plantId);
                         if (map.getLayer(layerId)) {
                             map.setLayoutProperty(
                                 layerId,
