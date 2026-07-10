@@ -430,6 +430,37 @@
             });
         }
 
+        // マップ生成関数
+        function createMap() {
+            const map = new maplibregl.Map({
+                container: "map",
+                center: CONFIG.mapCenter,
+                zoom: CONFIG.zoom,
+                style: {
+                    version: 8,
+                    sources: {
+                        "osm-tiles": {
+                            type: "raster",
+                            tiles: [CONFIG.osmTile],
+                            tileSize: 256,
+                            attribution: "© OpenStreetMap contributors"
+                        }
+                    },
+                    layers: [
+                        {
+                            id: "osm-layer",
+                            type: "raster",
+                            source: "osm-tiles",
+                            minzoom: 0,
+                            maxzoom: 19
+                        }
+                    ]
+                }
+            });
+            map.addControl(new maplibregl.NavigationControl());
+            return map;
+        }
+
         // マップ設定
         function initMap() {
             // メニューの構築
@@ -438,28 +469,8 @@
             setupHamburgerMenu();
             // 科の開閉（▼トグルボタン）
             setupFamilyToggle();
-            // マップ制御（MapLibreの初期化）
-            const osmUrl = CONFIG.osmTile;
-            const map = new maplibregl.Map({
-                container: 'map',
-                center: CONFIG.mapCenter,
-                zoom: CONFIG.zoom,
-                style: {
-                    version: 8,
-                    sources: {
-                        'osm-tiles': {
-                            type: 'raster',
-                            tiles: [osmUrl],
-                            tileSize: 256,
-                            attribution: '© OpenStreetMap contributors'
-                        }
-                    },
-                    layers: [
-                        { id: 'osm-layer', type: 'raster', source: 'osm-tiles', minzoom: 0, maxzoom: 19 }
-                    ]
-                }
-            });
-            map.addControl(new maplibregl.NavigationControl());
+            // マップの生成
+            const map = createMap();
             // 科（親）と種（子）の状態同期
             setupFamilyCheckboxes(map);
             // グレー地図切り替え
