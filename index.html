@@ -13,7 +13,7 @@ Copyright (c) 2026 Koseki, Yusuke
         body { margin: 0; padding: 0; font-family: sans-serif; }
         #map { position: absolute; top: 0; bottom: 0; width: 100%; }
         
-        /* メニューコンテナ */
+        /* メニュー全体 */
         .menu-container {
             position: absolute;
             top: 10px;
@@ -27,22 +27,18 @@ Copyright (c) 2026 Koseki, Yusuke
             overflow: hidden;
         }
 
-        /* メニューヘッダー */
+        /* 概要部分 */
         .menu-header {
             display: flex;
             align-items: flex-start;
             gap: 8px;
         }
-                
-        /* タイトル */
         .menu-title {
             margin: 0;
             font-weight: bold;
             line-height: 1.4;
             flex: 1;
         }
-
-        /* メニュー概要 */
         .menu-summary {
             margin-top: 4px;
             margin-bottom: 4px;
@@ -50,7 +46,7 @@ Copyright (c) 2026 Koseki, Yusuke
             color: #555;
         }
         
-        /* ハンバーガーボタン表示切り替え */
+        /* ハンバーガーボタン */
         #menu-toggle {
             width: 32px;
             height: 32px;
@@ -62,14 +58,12 @@ Copyright (c) 2026 Koseki, Yusuke
             padding: 0;
             flex-shrink: 0;
         }
-
-        /* ハンバーガーボタンホバー時のスタイル */
         #menu-toggle:hover {
             background: rgba(0,0,0,0.08);
             border-radius: 4px;
         }
 
-        /*　メニューコンテンツ（科ごとの植物リスト） */
+        /*　植物リスト部分 */
         #menu-content {
             margin-top: 8px;
             padding-top: 8px;
@@ -83,8 +77,6 @@ Copyright (c) 2026 Koseki, Yusuke
                 opacity .2s ease, 
                 padding 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-
-        /* メニューコンテンツ折りたたみ時のスタイル */
         #menu-content.collapsed {
             max-height: 0;
             opacity: 0;
@@ -94,7 +86,7 @@ Copyright (c) 2026 Koseki, Yusuke
             overflow: hidden;
         }
 
-        /* 科ごとの植物リストの子要素（種） */
+        /* 科メニュー */
         .family-children {
             margin-left: 18px;
             overflow: hidden;
@@ -102,50 +94,42 @@ Copyright (c) 2026 Koseki, Yusuke
             transition: max-height 0.3s ease, opacity 0.2s ease;
             opacity: 1;
         }
-
         .family-children.collapsed {
             max-height: 0;
             opacity: 0;
             overflow: hidden;
         }
-
         .family-header {
             cursor: pointer;
             user-select: none;
         }
-
         .family-toggle {
             width: 16px;
             display: inline-block;
         }
         
-        /* メニュー項目 */
+        /* 種メニュー */
         .menu-item {
             display: flex;
             align-items: center;
             gap: 6px;
             cursor: pointer;
         }
-
         .menu-item input {
             margin:0;
             flex-shrink:0;
         }
-
         .menu-item.child {
             padding-left: 18px;
         }
-        
         .menu-item span:last-child{
             flex:1;
         }
-
         .menu-footer {
             margin-top: 8px;
             padding-top: 8px;
             border-top: 1px solid #ddd;
         }
-        
         .color-badge {
             width: 12px;
             height: 12px;
@@ -153,7 +137,7 @@ Copyright (c) 2026 Koseki, Yusuke
             flex-shrink: 0;
         }
 
-        /* 背景グレー化のアイコン */
+        /* グレー地図のアイコン */
         .gray-square-icon {
             display: inline-block;
             width: 12px;
@@ -171,7 +155,6 @@ Copyright (c) 2026 Koseki, Yusuke
             line-height: 1.4;
             max-width: 220px;
         }
-        
         .popup-title {
             font-weight: bold;
             font-size: 15px;
@@ -179,7 +162,6 @@ Copyright (c) 2026 Koseki, Yusuke
             border-bottom: 1px solid #ccc;
             padding-bottom: 2px;
         }
-
         .popup-img {
             width: 100%;
             height: auto;
