@@ -489,10 +489,15 @@ Copyright (c) 2026 Koseki, Yusuke
             return map;
         }
 
-        // 植物ポイントデータの描画設定関数
+        // マップロードイベント登録関数
+        function onMapLoad(map) {
+            setupPlantLayers(map);
+        }
+
+        // マップロードイベント処理関数
         function setupMapEvents(map) {
             map.on("load", () => {
-                setupPlantLayers(map);
+                onMapLoad(map);
             });
         }
 
@@ -516,7 +521,7 @@ Copyright (c) 2026 Koseki, Yusuke
             const map = createMap();
             // メニューの初期化
             setupMenu(map);
-            // 植物ポイントデータの描画
+            // マップロードイベント処理
             setupMapEvents(map);
         }
     </script>
