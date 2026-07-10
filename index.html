@@ -191,7 +191,7 @@
             zoom: 15
         };
         
-        // メニューコンテンツの生成
+        // メニューコンテンツ生成関数
         function buildMenu() {
             const menu = document.getElementById("menu-content");
             // 科ごとにまとめる
@@ -332,12 +332,8 @@
             });
         }
 
-        // マップ設定
-        function initMap() {
-            // メニューの構築
-            buildMenu();
-
-            // ハンバーガーメニュー開閉
+        // ハンバーガーメニュー開閉
+        function setupHamburgerMenu() {
             const menuToggle = document.getElementById("menu-toggle");
             const menuContent = document.getElementById("menu-content");
             let isOpen = true;
@@ -346,6 +342,15 @@
                 menuContent.classList.toggle("collapsed");
                 menuToggle.textContent = isOpen ? "✕" : "☰";
             });
+        }
+        
+        // マップ設定
+        function initMap() {
+            // メニューの構築
+            buildMenu();
+
+            // メニューの開閉（ハンバーガーボタン）
+            setupHamburgerMenu();
     
             // 科の開閉（▼トグル）
             document.querySelectorAll('.family-header').forEach(header => {
