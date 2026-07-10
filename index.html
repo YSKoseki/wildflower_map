@@ -196,11 +196,13 @@ Copyright (c) 2026 Koseki, Yusuke
         <!-- メニューのヘッダー -->
         <div class="menu-header">
             <button id="menu-toggle" aria-label="メニュー">✕</button>
-            <div class="menu-title">
-                大妻女子大学周辺<br>
-                野の花マップ
+            <div>
+                <div class="menu-title">
+                    大妻女子大学周辺<br>
+                    野の花マップ
+                </div>
+                <div id="menu-summary" class="menu-summary">登録数: 0科 0種 0地点</div>
             </div>
-            <div id="menu-summary" class="menu-summary"></div>
         </div>
     
         <!-- 科ごとの植物名リスト：折りたたまれる部分 -->
@@ -295,7 +297,7 @@ Copyright (c) 2026 Koseki, Yusuke
             });
         }
 
-        // メニュー概要更新関数
+        // メニュー概要（科・種・地点数）更新関数
         function updateMenuSummary() {
             // 科数
             const familyCount = Object.keys(groupPlantsByFamily()).length;
@@ -308,7 +310,7 @@ Copyright (c) 2026 Koseki, Yusuke
             );
             // 表示
             document.getElementById("menu-summary").textContent =
-                `${familyCount}科 ${speciesCount}種 ${pointCount}地点`;
+                `登録数: ${familyCount}科 ${speciesCount}種 ${pointCount}地点`;
         }        
 
         // メニューコンテンツ生成関数
