@@ -32,7 +32,6 @@ Copyright (c) 2026 Koseki, Yusuke
             display: flex;
             align-items: flex-start;
             gap: 8px;
-            margin-bottom: 4px;
         }
                 
         /* タイトル */
@@ -64,12 +63,13 @@ Copyright (c) 2026 Koseki, Yusuke
             flex-shrink: 0;
         }
 
+        /* ハンバーガーボタンホバー時のスタイル */
         #menu-toggle:hover {
             background: rgba(0,0,0,0.08);
             border-radius: 4px;
         }
 
-        /* ハンバーガーメニュー開閉 */
+        /*　メニューコンテンツ（科ごとの植物リスト） */
         #menu-content {
             margin-top: 8px;
             padding-top: 8px;
@@ -84,6 +84,7 @@ Copyright (c) 2026 Koseki, Yusuke
                 padding 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
+        /* メニューコンテンツ折りたたみ時のスタイル */
         #menu-content.collapsed {
             max-height: 0;
             opacity: 0;
@@ -93,7 +94,7 @@ Copyright (c) 2026 Koseki, Yusuke
             overflow: hidden;
         }
 
-        /* 科折りたたみ＋インデント */
+        /* 科ごとの植物リストの子要素（種） */
         .family-children {
             margin-left: 18px;
             overflow: hidden;
