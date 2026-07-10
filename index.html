@@ -451,7 +451,7 @@ Copyright (c) 2026 Koseki, Yusuke
         }
 
         // 植物レイヤ初期化処理関数（個別）
-        function setupPlant(map, plant) {
+        function initializePlantLayer(map, plant) {
             addPlantLayer(map, plant);
             setupPlantInteractions(map, plant);
         }
@@ -459,7 +459,7 @@ Copyright (c) 2026 Koseki, Yusuke
         // 植物レイヤ初期化処理関数（まとめて）
         function setupPlantLayers(map) {
             PLANTS.forEach(plant => {
-                setupPlant(map, plant);
+                initializePlantLayer(map, plant);
             });
         }
 
