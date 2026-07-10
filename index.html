@@ -195,7 +195,16 @@ Copyright (c) 2026 Koseki, Yusuke
             mapCenter: [139.7437, 35.6897],
             zoom: 15
         };
-        
+
+        // レイヤID生成関数
+        function getLayerId(plantId) {
+            return `layer-${plantId}-points`;
+        }
+
+        // ソースID生成関数
+        function getSourceId(plantId) {
+            return `source-${plantId}`;
+        }
 
         // 植物データを科ごとにまとめる関数
         function groupPlantsByFamily() {
@@ -251,24 +260,7 @@ Copyright (c) 2026 Koseki, Yusuke
             });
         }
 
-        // CSS
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = CONFIG.cdnBase + '/maplibre-gl.css';
-        document.head.appendChild(link);
-    
-        // JS
-        const script = document.createElement('script');
-        script.src = CONFIG.cdnBase + '/maplibre-gl.js';
-        script.onload = () => initMap();
-        script.onerror = (e) => {
-            console.error("MapLibre load failed", e);
-            console.error("URL:", script.src);
-        };
-    
-        document.head.appendChild(script);
-        
-        // ポップアップHTML生成関数
+       // ポップアップHTML生成関数
         function createPopupHtml(plant, props) {
             const species = plant.species;
             const datetime = props.datetime || "未記録";
@@ -312,17 +304,7 @@ Copyright (c) 2026 Koseki, Yusuke
             });
         }
 
-        // レイヤID生成関数
-        function getLayerId(plantId) {
-            return `layer-${plantId}-points`;
-        }
-
-        // ソースID生成関数
-        function getSourceId(plantId) {
-            return `source-${plantId}`;
-        }
-
-        // 植物レイヤ追加関数
+       // 植物レイヤ追加関数
         function addPlantLayer(map, plant) {
             map.addSource(getSourceId(plant.id), {
                 type: 'geojson',
@@ -361,7 +343,26 @@ Copyright (c) 2026 Koseki, Yusuke
             });
         }
 
-        // ハンバーガーメニュー開閉関数
+       // 植物レイヤのインタラクション設定関数
+        function setupPlantInteractions(map, plant) {
+            setupLayerToggle(map, plant);
+            setupPopup(map, plant);
+        }
+
+        // 植物レイヤ初期化処理関数（個別）
+        function initializePlantLayer(map, plant) {
+            addPlantLayer(map, plant);
+            setupPlantInteractions(map, plant);
+        }
+
+        // 植物レイヤ初期化処理関数（まとめて）
+        function setupPlantLayers(map) {
+            PLANTS.forEach(plant => {
+                initializePlantLayer(map, plant);
+            });
+        }
+
+         // ハンバーガーメニュー開閉関数
         function setupHamburgerMenu() {
             const menuToggle = document.getElementById("menu-toggle");
             const menuContent = document.getElementById("menu-content");
@@ -444,23 +445,18 @@ Copyright (c) 2026 Koseki, Yusuke
             });
         }
 
-        // 植物レイヤのインタラクション設定関数
-        function setupPlantInteractions(map, plant) {
-            setupLayerToggle(map, plant);
-            setupPopup(map, plant);
-        }
-
-        // 植物レイヤ初期化処理関数（個別）
-        function initializePlantLayer(map, plant) {
-            addPlantLayer(map, plant);
-            setupPlantInteractions(map, plant);
-        }
-
-        // 植物レイヤ初期化処理関数（まとめて）
-        function setupPlantLayers(map) {
-            PLANTS.forEach(plant => {
-                initializePlantLayer(map, plant);
-            });
+        // メニュー初期化関数
+        function setupMenu(map) {
+            // メニューの構築
+            buildMenu();
+            // メニューの開閉（ハンバーガーボタン）
+            setupHamburgerMenu();
+            // 科の開閉（▼トグルボタン）
+            setupFamilyToggle();
+            // 科（親）と種（子）の状態同期
+            setupFamilyCheckboxes(map);
+            // グレー地図切り替え
+            setupGrayscaleToggle(map);
         }
 
         // マップ生成関数
@@ -505,21 +501,7 @@ Copyright (c) 2026 Koseki, Yusuke
                 onMapLoad(map);
             });
         }
-
-        // メニュー初期化関数
-        function setupMenu(map) {
-            // メニューの構築
-            buildMenu();
-            // メニューの開閉（ハンバーガーボタン）
-            setupHamburgerMenu();
-            // 科の開閉（▼トグルボタン）
-            setupFamilyToggle();
-            // 科（親）と種（子）の状態同期
-            setupFamilyCheckboxes(map);
-            // グレー地図切り替え
-            setupGrayscaleToggle(map);
-        }
-
+        
         // マップ初期化関数
         function initMap() {
             // マップの生成
@@ -529,6 +511,23 @@ Copyright (c) 2026 Koseki, Yusuke
             // マップロードイベント処理
             setupMapEvents(map);
         }
+
+        // CSS
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = CONFIG.cdnBase + '/maplibre-gl.css';
+        document.head.appendChild(link);
+    
+        // JS
+        const script = document.createElement('script');
+        script.src = CONFIG.cdnBase + '/maplibre-gl.js';
+        script.onload = () => initMap();
+        script.onerror = (e) => {
+            console.error("MapLibre load failed", e);
+            console.error("URL:", script.src);
+        };
+    
+        document.head.appendChild(script);
     </script>
 </body>
 </html>
