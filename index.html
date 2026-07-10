@@ -428,19 +428,17 @@
             });
         }
 
-        // 植物レイヤ初期化処理関数
+        // 植物レイヤ初期化処理関数（植物種ごと）
+        function setupPlant(map, plant) {
+            addPlantLayer(map, plant);
+            setupLayerToggle(map, plant);
+            setupPopup(map, plant);
+        }
+
+        // 植物レイヤ初期化処理関数（まとめて）
         function setupPlantLayers(map) {
-            // 植物レイヤ追加
             PLANTS.forEach(plant => {
-                addPlantLayer(map, plant);
-            });
-            // 植物レイヤ表示切り替え
-            PLANTS.forEach(plant => {
-                setupLayerToggle(map, plant);
-            });
-            // ポップアップ表示
-            PLANTS.forEach(plant => {
-                setupPopup(map, plant);
+                setupPlant(map, plant);
             });
         }
 
