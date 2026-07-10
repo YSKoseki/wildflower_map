@@ -1,3 +1,16 @@
+/**
+ * @fileoverview JavaScript file for defining data for the wildflower map.
+ *
+ * @version 1.0.0
+ * @date 2026-07-10
+ * @author Koseki, Yusuke
+ *
+ * @license
+ * Copyright (c) 2026 Koseki, Yusuke
+ * Released under the MIT license
+ * https://opensource.org
+ */
+
 window.FAMILY = {
     KIKU: "kiku",
     NADESHIKO: "nadeshiko",
