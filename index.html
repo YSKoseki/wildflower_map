@@ -332,7 +332,7 @@
             });
         }
 
-        // ハンバーガーメニュー開閉
+        // ハンバーガーメニュー開閉関数
         function setupHamburgerMenu() {
             const menuToggle = document.getElementById("menu-toggle");
             const menuContent = document.getElementById("menu-content");
@@ -343,16 +343,9 @@
                 menuToggle.textContent = isOpen ? "✕" : "☰";
             });
         }
-        
-        // マップ設定
-        function initMap() {
-            // メニューの構築
-            buildMenu();
 
-            // メニューの開閉（ハンバーガーボタン）
-            setupHamburgerMenu();
-    
-            // 科の開閉（▼トグル）
+        // 科開閉（▼トグルボタン）関数
+        function setupFamilyToggle() {
             document.querySelectorAll('.family-header').forEach(header => {
                 const family = header.dataset.family;
                 const children = document.querySelector(`.family-children[data-family="${family}"]`);
@@ -367,6 +360,18 @@
                     toggleIcon.textContent = isCollapsed ? '▶' : '▼';
                 });
             });
+        }
+
+        // マップ設定
+        function initMap() {
+            // メニューの構築
+            buildMenu();
+
+            // メニューの開閉（ハンバーガーボタン）
+            setupHamburgerMenu();
+    
+            // 科の開閉（▼トグルボタン）
+            setupFamilyToggle();
     
             // 科ごとの種数を表示
             document.querySelectorAll('.family-header').forEach(header => {
