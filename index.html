@@ -414,18 +414,31 @@
             });
         }
 
+        // 植物レイヤ初期化処理関数
+        function setupPlantLayers(map) {
+            // 植物レイヤ追加
+            PLANTS.forEach(plant => {
+                addPlantLayer(map, plant);
+            });
+            // 植物レイヤ表示切り替え
+            PLANTS.forEach(plant => {
+                setupLayerToggle(map, plant);
+            });
+            // ポップアップ表示
+            PLANTS.forEach(plant => {
+                setupPopup(map, plant);
+            });
+        }
+
         // マップ設定
         function initMap() {
             // メニューの構築
             buildMenu();
-
             // メニューの開閉（ハンバーガーボタン）
             setupHamburgerMenu();
-    
             // 科の開閉（▼トグルボタン）
             setupFamilyToggle();
-    
-            // マップ制御
+            // マップ制御（MapLibreの初期化）
             const osmUrl = CONFIG.osmTile;
             const map = new maplibregl.Map({
                 container: 'map',
@@ -447,29 +460,13 @@
                 }
             });
             map.addControl(new maplibregl.NavigationControl());
-
             // 科（親）と種（子）の状態同期
             setupFamilyCheckboxes(map);
-            
             // グレー地図切り替え
             setupGrayscaleToggle(map);
-
             // 植物ポイントデータの描画
-            map.on('load', () => {
-                // 植物レイヤ追加
-                PLANTS.forEach(plant => {
-                    addPlantLayer(map, plant);
-                });
-    
-                // 植物レイヤ表示切り替え
-                PLANTS.forEach(plant => {
-                    setupLayerToggle(map, plant);
-                });
-
-                // ポップアップ表示
-                PLANTS.forEach(plant => {
-                    setupPopup(map, plant);
-                });
+            map.on("load", () => {
+                setupPlantLayers(map);
             });
         }
     </script>
