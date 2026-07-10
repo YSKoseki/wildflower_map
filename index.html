@@ -379,7 +379,7 @@
             }
         }
         
-        // 科（親）と種（子）のイベント設定
+        // 科チェックボックスイベント設定関数
         function setupFamilyCheckboxes(map) {
             document.querySelectorAll('.family-checkbox').forEach(parent => {
                 parent.addEventListener('change', (e) => {
@@ -403,6 +403,14 @@
             });
             document.querySelectorAll(".family-checkbox").forEach(parent => {
                 updateFamilyState(parent.dataset.family);
+            });
+        }
+
+        // グレー地図切り替え設定関数
+        function setupGrayscaleToggle(map) {
+            document.getElementById("check-grayscale").addEventListener("change", (e) => {
+                const saturationValue = e.target.checked ? -1 : 0;
+                map.setPaintProperty("osm-layer", "raster-saturation", saturationValue);
             });
         }
 
@@ -442,12 +450,9 @@
 
             // 科（親）と種（子）の状態同期
             setupFamilyCheckboxes(map);
-    
-            // 背景の色彩設定（チェックボックス連動）
-            document.getElementById('check-grayscale').addEventListener('change', (e) => {
-                const saturationValue = e.target.checked ? -1 : 0;
-                map.setPaintProperty('osm-layer', 'raster-saturation', saturationValue);
-            });
+            
+            // グレー地図切り替え
+            setupGrayscaleToggle(map);
 
             // 植物ポイントデータの描画
             map.on('load', () => {
