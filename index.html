@@ -444,11 +444,16 @@ Copyright (c) 2026 Koseki, Yusuke
             });
         }
 
-        // 植物レイヤ初期化処理関数（植物種ごと）
-        function setupPlant(map, plant) {
-            addPlantLayer(map, plant);
+        // 植物レイヤのインタラクション設定関数
+        function setupPlantInteractions(map, plant) {
             setupLayerToggle(map, plant);
             setupPopup(map, plant);
+        }
+
+        // 植物レイヤ初期化処理関数（個別）
+        function setupPlant(map, plant) {
+            addPlantLayer(map, plant);
+            setupPlantInteractions(map, plant);
         }
 
         // 植物レイヤ初期化処理関数（まとめて）
@@ -489,12 +494,12 @@ Copyright (c) 2026 Koseki, Yusuke
             return map;
         }
 
-        // マップロードイベント登録関数
+        // マップロード時の処理
         function onMapLoad(map) {
             setupPlantLayers(map);
         }
 
-        // マップロードイベント処理関数
+        // マップイベント設定関数
         function setupMapEvents(map) {
             map.on("load", () => {
                 onMapLoad(map);
