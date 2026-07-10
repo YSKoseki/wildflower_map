@@ -473,6 +473,13 @@
             return map;
         }
 
+        // 植物ポイントデータの描画設定関数
+        function setupMapEvents(map) {
+            map.on("load", () => {
+                setupAllPlantLayers(map);
+            });
+        }
+
         // マップ設定
         function initMap() {
             // メニューの構築
@@ -488,9 +495,7 @@
             // グレー地図切り替え
             setupGrayscaleToggle(map);
             // 植物ポイントデータの描画
-            map.on("load", () => {
-                setupPlantLayers(map);
-            });
+            setupMapEvents(map);
         }
     </script>
 </body>
