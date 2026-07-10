@@ -324,14 +324,14 @@ Copyright (c) 2026 Koseki, Yusuke
 
         // 植物レイヤ追加関数
         function addPlantLayer(map, plant) {
-            map.addSource(`source-${plant.id}`, {
+            map.addSource(getSourceId(plant), {
                 type: 'geojson',
                 data: `geojson/${plant.id}.geojson`
             });
             map.addLayer({
-                id: `layer-${plant.id}-points`,
+                id: getLayerId(plant),
                 type: 'circle',
-                source: `source-${plant.id}`,
+                source: getSourceId(plant),
                 layout: {
                     visibility: 'visible'
                 },
@@ -348,7 +348,7 @@ Copyright (c) 2026 Koseki, Yusuke
         function setupLayerToggle(map, plant) {
             const checkbox = document.getElementById(`check-${plant.id}`);
             if (!checkbox) return;
-            const layerId = `layer-${plant.id}-points`;
+            const layerId = getLayerId(plant);
             checkbox.addEventListener("change", e => {
                 if (map.getLayer(layerId)) {
                     map.setLayoutProperty(
