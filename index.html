@@ -211,14 +211,14 @@ Copyright (c) 2026 Koseki, Yusuke
         const CONFIG = {
             cdnBase: 'https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist',
             osmTile: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-            mapCenter: [139.7437, 35.6897],
+            mapCenter: [139.743650, 35.692126],
             zoom: 15
         };
 
         // 大学情報
         const UNIVERSITY = {
             name: "大妻女子大学",
-            lngLat: [139.7437, 35.6897]
+            lngLat: [139.743611, 35.690833]
         };
 
         // 大学マーカー追加関数
@@ -231,7 +231,7 @@ Copyright (c) 2026 Koseki, Yusuke
             new maplibregl.Marker({
                 element: marker
             })
-                .setLngLat([139.7437, 35.6897])
+                .setLngLat([139.743611, 35.690833])
                 .setPopup(
                     new maplibregl.Popup().setText("大妻女子大学")
                 )
