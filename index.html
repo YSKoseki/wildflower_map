@@ -544,13 +544,12 @@ Copyright (c) 2026 Koseki, Yusuke
         function addUniversityLayer(map) {
             map.addLayer({
                 id: "university-layer",
-                type: "circle",
+                type: "symbol",
                 source: "university",
-                paint: {
-                    "circle-radius": 6,
-                    "circle-color": "#005BBB",
-                    "circle-stroke-color": "#FFF",
-                    "circle-stroke-width": 2
+                layout: {
+                    "icon-image": "university-icon",
+                    "icon-size": 0.06,
+                    "icon-allow-overlap": true
                 }
             }, getLayerId(PLANTS[0].id));
         }
@@ -588,12 +587,12 @@ Copyright (c) 2026 Koseki, Yusuke
         
         // マップロード時の処理関数
         async function onMapLoad(map) {
-            await setupPlantLayers(map);
-            // 大学アイコンを読み込む
-            await loadUniversityIcon(map);
-            // 大学マーカーを追加
+            // 大学アイコンの読み込みとレイヤ追加
             addUniversitySource(map);
+            await loadUniversityIcon(map);
             addUniversityLayer(map);
+            // 植物レイヤの追加
+            await setupPlantLayers(map);
             // 地点数表示を更新
             updatePointCounts();
             // メニュー概要を更新
