@@ -554,6 +554,46 @@ Copyright (c) 2026 Koseki, Yusuke
             });
         }
 
+        // 大学ポップアップ設定関数
+        function setupUniversityPopup(map) {
+            const popup = new maplibregl.Popup({
+                offset: 16
+            });
+            map.on("click", "university-layer", (e) => {
+                popup
+                    .setLngLat(e.features[0].geometry.coordinates)
+                    .setHTML(`
+                        <div class="popup-content">
+                            <div class="popup-title">🏫 大妻女子大学</div>
+                            <div><b>家政学部ライフデザイン学科</b></div>
+                            <div style="margin-top:6px;">
+                                <a href="https://www.home.otsuma.ac.jp/life-design/"
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                    &bull; 学科公式サイト
+                                </a>
+                            </div>
+                            <div style="margin-top:4px;">
+                                <a href="https://note.com/owulife/m/m30ca9f85ab7d"
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                    &bull; 学科公式note &gt; マガジン<br>
+                                    &gt; 生物環境保全学研究室
+                                </a>
+                            </div>
+                        </div>
+                    `)
+                    .addTo(map);
+            });
+            map.on("mouseenter", "university-layer", () => {
+                map.getCanvas().style.cursor = "pointer";
+            });
+
+            map.on("mouseleave", "university-layer", () => {
+                map.getCanvas().style.cursor = "";
+            });
+        }
+
         // マップ生成関数
         function createMap() {
             const map = new maplibregl.Map({
@@ -591,6 +631,7 @@ Copyright (c) 2026 Koseki, Yusuke
             addUniversitySource(map);
             await loadUniversityIcon(map);
             addUniversityLayer(map);
+            setupUniversityPopup(map);
             // 植物レイヤの追加
             await setupPlantLayers(map);
             // 地点数表示を更新
