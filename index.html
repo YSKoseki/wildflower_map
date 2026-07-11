@@ -531,12 +531,12 @@ Copyright (c) 2026 Koseki, Yusuke
 
         // 大学アイコン読み込み関数
         async function loadUniversityIcon(map) {
-            const image = await map.loadImage(
-                "image/university/university.svg"
+            const result = await map.loadImage(
+                "image/university/university.png"
             );
             map.addImage(
                 "university-icon",
-                image.data
+                result.data
             );
         }
 
@@ -548,10 +548,10 @@ Copyright (c) 2026 Koseki, Yusuke
                 source: "university",
                 layout: {
                     "icon-image": "university-icon",
-                    "icon-size": 0.06,
+                    "icon-size": 0.6,
                     "icon-allow-overlap": true
                 }
-            }, getLayerId(PLANTS[0].id));
+            });
         }
 
         // マップ生成関数
