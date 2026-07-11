@@ -533,12 +533,13 @@ Copyright (c) 2026 Koseki, Yusuke
         function addUniversityLayer(map) {
             map.addLayer({
                 id: "university-layer",
-                type: "symbol",
+                type: "circle",
                 source: "university",
-                layout: {
-                    "text-field": "🎓",
-                    "text-size": 22,
-                    "text-allow-overlap": true
+                paint: {
+                    "circle-radius": 8,
+                    "circle-color": "#005BBB",
+                    "circle-stroke-color": "#FFF",
+                    "circle-stroke-width": 2
                 }
             });
         }
