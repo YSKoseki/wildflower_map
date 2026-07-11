@@ -215,6 +215,29 @@ Copyright (c) 2026 Koseki, Yusuke
             zoom: 15
         };
 
+        // 大学情報
+        const UNIVERSITY = {
+            name: "大妻女子大学",
+            lngLat: [139.7437, 35.6897]
+        };
+
+        // 大学マーカー追加関数
+        function addUniversityMarker(map) {
+            const marker = document.createElement("div");
+            marker.textContent = "🎓";
+            marker.style.fontSize = "28px";
+            marker.style.cursor = "pointer";
+            marker.title = "大妻女子大学";
+            new maplibregl.Marker({
+                element: marker
+            })
+                .setLngLat([139.7437, 35.6897])
+                .setPopup(
+                    new maplibregl.Popup().setText("大妻女子大学")
+                )
+                .addTo(map);
+        }
+
         // レイヤID生成関数
         function getLayerId(plantId) {
             return `layer-${plantId}-points`;
@@ -559,6 +582,8 @@ Copyright (c) 2026 Koseki, Yusuke
             updatePointCounts();
             // メニュー概要を更新
             updateMenuSummary();
+            // 大学マーカーを追加
+            addUniversityMarker(map);
         }
 
         // マップイベント設定関数
