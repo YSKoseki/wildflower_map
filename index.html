@@ -529,6 +529,20 @@ Copyright (c) 2026 Koseki, Yusuke
             });
         }
 
+        // 大学レイヤ追加関数
+        function addUniversityLayer(map) {
+            map.addLayer({
+                id: "university-layer",
+                type: "symbol",
+                source: "university",
+                layout: {
+                    "text-field": "🎓",
+                    "text-size": 22,
+                    "text-allow-overlap": true
+                }
+            });
+        }
+
         // マップ生成関数
         function createMap() {
             const map = new maplibregl.Map({
@@ -565,6 +579,7 @@ Copyright (c) 2026 Koseki, Yusuke
             await setupPlantLayers(map);
             // 大学マーカーを追加
             addUniversitySource(map);
+            addUniversityLayer(map);
             // 地点数表示を更新
             updatePointCounts();
             // メニュー概要を更新
