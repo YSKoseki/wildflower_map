@@ -215,29 +215,6 @@ Copyright (c) 2026 Koseki, Yusuke
             zoom: 15
         };
 
-        // 大学情報
-        const UNIVERSITY = {
-            name: "大妻女子大学",
-            lngLat: [139.74343160530637, 35.691215651190205]
-        };
-
-        // 大学マーカー追加関数
-        function addUniversityMarker(map) {
-            const marker = document.createElement("div");
-            marker.textContent = "🎓";
-            marker.style.fontSize = "28px";
-            marker.style.cursor = "pointer";
-            marker.title = "大妻女子大学";
-            new maplibregl.Marker({
-                element: marker
-            })
-                .setLngLat([139.74343160530637, 35.691215651190205])
-                .setPopup(
-                    new maplibregl.Popup().setText("大妻女子大学")
-                )
-                .addTo(map);
-        }
-
         // レイヤID生成関数
         function getLayerId(plantId) {
             return `layer-${plantId}-points`;
@@ -544,6 +521,14 @@ Copyright (c) 2026 Koseki, Yusuke
             setupGrayscaleToggle(map);
         }
 
+        // 大学ソース追加関数
+        function addUniversitySource(map) {
+            map.addSource("university", {
+                type: "geojson",
+                data: "geojson/university.geojson"
+            });
+        }
+
         // マップ生成関数
         function createMap() {
             const map = new maplibregl.Map({
@@ -578,12 +563,12 @@ Copyright (c) 2026 Koseki, Yusuke
         // マップロード時の処理関数
         async function onMapLoad(map) {
             await setupPlantLayers(map);
+            // 大学マーカーを追加
+            addUniversitySource(map);
             // 地点数表示を更新
             updatePointCounts();
             // メニュー概要を更新
             updateMenuSummary();
-            // 大学マーカーを追加
-            addUniversityMarker(map);
         }
 
         // マップイベント設定関数

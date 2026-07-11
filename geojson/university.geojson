@@ -1,0 +1,18 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "大妻女子大学"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.74343160530637,
+          35.691215651190205
+        ]
+      }
+    }
+  ]
+}
