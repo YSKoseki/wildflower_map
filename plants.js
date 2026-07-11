@@ -91,7 +91,7 @@ window.PLANTS = [
         id: "onitabirako",
         species: "オニタビラコ",
         color: "#ffa502",
-        strokeColor: "#ffffff",
+        strokeColor: "#666",
         pointCount: 0
     },
     {
@@ -99,7 +99,7 @@ window.PLANTS = [
         id: "tanpopo",
         species: "タンポポ",
         color: "#ffec3d",
-        strokeColor: "#666666",
+        strokeColor: "#666",
         pointCount: 0
     }
 ];
