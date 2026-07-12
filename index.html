@@ -486,6 +486,26 @@ Copyright (c) 2026 Koseki, Yusuke
                 parent.checked = false;
                 parent.indeterminate = true;
             }
+            updateAllState();
+        }
+
+        // 「すべて表示」チェックボックス状態更新関数
+        function updateAllState() {
+            const allCheckbox = document.getElementById("check-all");
+            const species = PLANTS.map(plant =>
+                document.getElementById(`check-${plant.id}`)
+            );
+            const checkedCount = species.filter(c => c.checked).length;
+            if (checkedCount === 0) {
+                allCheckbox.checked = false;
+                allCheckbox.indeterminate = false;
+            } else if (checkedCount === species.length) {
+                allCheckbox.checked = true;
+                allCheckbox.indeterminate = false;
+            } else {
+                allCheckbox.checked = false;
+                allCheckbox.indeterminate = true;
+            }
         }
         
         // 科チェックボックスイベント設定関数
@@ -541,6 +561,7 @@ Copyright (c) 2026 Koseki, Yusuke
                     }
                 });
             });
+            updateAllState();
         }
 
         // グレー地図切り替え設定関数
