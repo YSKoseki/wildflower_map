@@ -308,7 +308,17 @@ Copyright (c) 2026 Koseki, Yusuke
             // 科ごとにまとめる
             const families = groupPlantsByFamily();
             // HTML文字列を組み立てる
-            menu.innerHTML = "";
+            menu.innerHTML = `
+                <label class="menu-item">
+                    <input
+                        type="checkbox"
+                        id="check-all"
+                        checked
+                    >
+                    <span>すべて表示</span>
+                </label>
+                <hr>
+            `;
             // 科ごとにHTMLを生成して追加
             Object.entries(families).forEach(([familyId, family]) => {
                 const group = document.createElement("div");
