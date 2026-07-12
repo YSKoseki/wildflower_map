@@ -193,15 +193,6 @@ Copyright (c) 2026 Koseki, Yusuke
     
         <!-- 科ごとの植物名リスト：折りたたまれる部分 -->
         <div id="menu-content"></div>
-    
-        <!-- 常に表示 -->
-        <div class="menu-footer">
-            <label class="menu-item">
-                <input type="checkbox" id="check-grayscale">
-                <span class="gray-square-icon"></span>
-                <span>背景グレー表示</span>
-            </label>
-        </div>
     </div>
     
     <div id="map"></div>
@@ -310,6 +301,14 @@ Copyright (c) 2026 Koseki, Yusuke
             const families = groupPlantsByFamily();
             // HTML文字列を組み立てる
             menu.innerHTML = `
+                <label class="menu-item">
+                    <input
+                        type="checkbox"
+                        id="check-grayscale"
+                    >
+                    <span class="gray-square-icon"></span>
+                    <span>グレー地図</span>
+                </label>
                 <label class="menu-item">
                     <input
                         type="checkbox"
