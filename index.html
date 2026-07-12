@@ -403,19 +403,29 @@ Copyright (c) 2026 Koseki, Yusuke
             });
         }
 
+        // 植物レイヤ表示設定関数
+        function setPlantVisibility(map, plantId, visible) {
+            const layerId = getLayerId(plantId);
+            if (map.getLayer(layerId)) {
+                map.setLayoutProperty(
+                    layerId,
+                    "visibility",
+                    visible ? "visible" : "none"
+                );
+            }
+        }
+
         // レイヤ表示切り替え関数
         function setupLayerToggle(map, plant) {
             const checkbox = document.getElementById(`check-${plant.id}`);
             if (!checkbox) return;
             const layerId = getLayerId(plant.id);
             checkbox.addEventListener("change", e => {
-                if (map.getLayer(layerId)) {
-                    map.setLayoutProperty(
-                        layerId,
-                        "visibility",
-                        e.target.checked ? "visible" : "none"
-                    );
-                }
+                setPlantVisibility(
+                    map,
+                    plant.id,
+                    e.target.checked
+                );
                 updateFamilyState(plant.familyId);
             });
         }
@@ -552,13 +562,11 @@ Copyright (c) 2026 Koseki, Yusuke
                     const checkbox = document.getElementById(`check-${plant.id}`);
                     checkbox.checked = checked;
                     const layerId = getLayerId(plant.id);
-                    if (map.getLayer(layerId)) {
-                        map.setLayoutProperty(
-                            layerId,
-                            "visibility",
-                            checked ? "visible" : "none"
-                        );
-                    }
+                    setPlantVisibility(
+                        map,
+                        plant.id,
+                        checked
+                    );
                 });
             });
             updateAllState();
