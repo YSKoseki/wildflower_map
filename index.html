@@ -63,6 +63,13 @@ Copyright (c) 2026 Koseki, Yusuke
             border-radius: 4px;
         }
 
+        /* 表示設定部分 */
+        .menu-section-title {
+            margin: 6px 0 4px;
+            font-size: 13px;
+            color: #666;
+        }
+
         /*　植物リスト部分 */
         #menu-content {
             margin-top: 0px;
@@ -132,18 +139,6 @@ Copyright (c) 2026 Koseki, Yusuke
             border-radius: 50%;
             box-sizing: border-box;
             flex-shrink: 0;
-        }
-
-        /* グレー地図のアイコン */
-        .gray-square-icon {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border: 1px solid #777; /* グレーの枠線 */
-            background-color: #e0e0e0; /* 内側の薄いグレー */
-            border-radius: 2px; /* 少しだけ角を丸く（完全な四角なら0に） */
-            flex-shrink: 0;
-            margin-right: 6px;
         }
 
         /* ポップアップ内のカスタムスタイル */
@@ -296,13 +291,15 @@ Copyright (c) 2026 Koseki, Yusuke
             const families = groupPlantsByFamily();
             // HTML文字列を組み立てる
             menu.innerHTML = `
+                <div class="menu-section-title">
+                    表示設定
+                </div>
                 <label class="menu-item">
                     <input
                         type="checkbox"
                         id="check-grayscale"
                     >
-                    <span class="gray-square-icon"></span>
-                    <span>グレー地図</span>
+                    <span>背景をグレー表示</span>
                 </label>
                 <label class="menu-item">
                     <input
