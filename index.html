@@ -433,10 +433,12 @@ Copyright (c) 2026 Koseki, Yusuke
         function setupHamburgerMenu() {
             const menuToggle = document.getElementById("menu-toggle");
             const menuContent = document.getElementById("menu-content");
-            let isOpen = true;
+            // 初期状態：閉じる
+            menuContent.classList.add("collapsed");
+            menuToggle.textContent = "☰";
             menuToggle.addEventListener("click", () => {
-                isOpen = !isOpen;
                 menuContent.classList.toggle("collapsed");
+                const isOpen = !menuContent.classList.contains("collapsed");
                 menuToggle.textContent = isOpen ? "✕" : "☰";
             });
         }
