@@ -19,7 +19,7 @@ Copyright (c) 2026 Koseki, Yusuke
             top: 10px;
             left: 10px;
             background: rgba(255, 255, 255, 0.95);
-            padding: 12px;
+            padding: 10px;
             border-radius: 6px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.3);
             z-index: 1;
@@ -27,7 +27,7 @@ Copyright (c) 2026 Koseki, Yusuke
             overflow: hidden;
         }
 
-        /* 概要部分 */
+        /* メニューヘッダー */
         .menu-header {
             display: flex;
             align-items: flex-start;
@@ -63,18 +63,10 @@ Copyright (c) 2026 Koseki, Yusuke
             border-radius: 4px;
         }
 
-        /* 表示設定部分 */
-        .menu-section-title {
-            margin: 6px 0 4px;
-            font-size: 13px;
-            color: #666;
-        }
-
         /*　植物リスト部分 */
         #menu-content {
-            margin-top: 0px;
-            padding-top: 8px;
-            border-top: 2px solid #ddd;
+            margin-top: 2px;
+            padding-top: 2px;
             max-height: 40vh;
             overflow-y: hidden;
             scrollbar-gutter: stable;
@@ -89,7 +81,6 @@ Copyright (c) 2026 Koseki, Yusuke
             opacity: 0;
             margin-top: 0;
             padding-top: 0;
-            border-top: none;
             overflow: hidden;
         }
 
@@ -115,7 +106,7 @@ Copyright (c) 2026 Koseki, Yusuke
             display: inline-block;
         }
         
-        /* 種メニュー */
+        /* メニュー項目 */
         .menu-item {
             display: flex;
             align-items: center;
@@ -128,10 +119,7 @@ Copyright (c) 2026 Koseki, Yusuke
             flex-shrink:0;
         }
         .menu-item.child {
-            padding-left: 13px;
-        }
-        .menu-item span:last-child{
-            flex:1;
+            padding-left: 15px;
         }
         .color-badge {
             width: 12px;
@@ -139,6 +127,13 @@ Copyright (c) 2026 Koseki, Yusuke
             border-radius: 50%;
             box-sizing: border-box;
             flex-shrink: 0;
+        }
+
+        /* メニュー間の区切り線 */
+        .menu-divider {
+            border: none;
+            border-top: 2px solid #ddd;
+            margin: 6px 6px;
         }
 
         /* ポップアップ内のカスタムスタイル */
@@ -180,6 +175,8 @@ Copyright (c) 2026 Koseki, Yusuke
                 </div>
             </div>
         </div>
+
+        <hr class="menu-divider">
     
         <!-- 科ごとの植物名リスト：折りたたまれる部分 -->
         <div id="menu-content"></div>
@@ -291,9 +288,6 @@ Copyright (c) 2026 Koseki, Yusuke
             const families = groupPlantsByFamily();
             // HTML文字列を組み立てる
             menu.innerHTML = `
-                <div class="menu-section-title">
-                    表示設定
-                </div>
                 <label class="menu-item">
                     <input
                         type="checkbox"
@@ -309,7 +303,6 @@ Copyright (c) 2026 Koseki, Yusuke
                     >
                     <span>全データを表示</span>
                 </label>
-                <hr>
             `;
             // 科ごとにHTMLを生成して追加
             Object.entries(families).forEach(([familyId, family]) => {
