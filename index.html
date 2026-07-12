@@ -516,6 +516,33 @@ Copyright (c) 2026 Koseki, Yusuke
             });
         }
 
+    // 「すべて表示」チェックボックス設定関数
+        function setupAllCheckbox(map) {
+            const allCheckbox = document.getElementById("check-all");
+            allCheckbox.addEventListener("change", (e) => {
+                const checked = e.target.checked;
+                // 全科
+                document.querySelectorAll(".family-checkbox")
+                    .forEach(parent => {
+                        parent.checked = checked;
+                        parent.indeterminate = false;
+                    });
+                // 全種
+                PLANTS.forEach(plant => {
+                    const checkbox = document.getElementById(`check-${plant.id}`);
+                    checkbox.checked = checked;
+                    const layerId = getLayerId(plant.id);
+                    if (map.getLayer(layerId)) {
+                        map.setLayoutProperty(
+                            layerId,
+                            "visibility",
+                            checked ? "visible" : "none"
+                        );
+                    }
+                });
+            });
+        }
+
         // グレー地図切り替え設定関数
         function setupGrayscaleToggle(map) {
             document.getElementById("check-grayscale").addEventListener("change", (e) => {
@@ -534,6 +561,8 @@ Copyright (c) 2026 Koseki, Yusuke
             setupFamilyToggle();
             // 科（親）と種（子）の状態同期
             setupFamilyCheckboxes(map);
+            // 「すべて表示」と科以下の状態同期
+            setupAllCheckbox(map);
             // グレー地図切り替え
             setupGrayscaleToggle(map);
         }
