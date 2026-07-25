@@ -1,5 +1,7 @@
 {
   "type": "FeatureCollection",
+  "name": "nogeshi",
+  "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
   "features": [
     {
       "type": "Feature",
@@ -8,8 +10,8 @@
         "coordinates": [139.74302649522443, 35.69122463792861]
       },
       "properties": {
-        "datetime": "2026/05/10 14:30",
-        "note": "道路のひび割れから元気に生えていました。",
+        "datetime": "2026年05月10日 14:30",
+        "note": "",
         "photoId": "001"
       }
     }
