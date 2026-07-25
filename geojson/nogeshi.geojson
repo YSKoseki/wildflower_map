@@ -19,7 +19,8 @@
       "type": "Feature",
       "properties": {
         "datetime": "2026年5月25日 13:17",
-        "note": "", "photoId": "002" },
+        "note": "",
+        "photoId": "002" },
         "geometry": {
           "type": "Point",
           "coordinates": [ 139.7411655, 35.6901162]
