@@ -333,7 +333,7 @@ Copyright (c) 2026 Koseki, Yusuke
         function createPopupHtml(plant, props) {
             const species = plant.species;
             const datetime = props.datetime || "未記録";
-            const note = props.note || "なし";
+            const memo = (props.note || "").trim();
             const photoId = props.photoId || "";
             const imagePath = photoId
                 ? `./image/${plant.id}/${photoId}.jpg`
@@ -341,9 +341,13 @@ Copyright (c) 2026 Koseki, Yusuke
             let html = `
                 <div class="popup-content">
                     <div class="popup-title">🌱 ${species}</div>
-                    <div><strong>日時:</strong> ${datetime}</div>
-                    <div><strong>備考:</strong> ${note}</div>
+                    <div><strong>観察日時:</strong> ${datetime}</div>
             `;
+            if (memo) {
+                html += `
+                    <div><strong>メモ:</strong> ${memo}</div>
+                `;
+            }
             html += `
                 <img
                     src="${imagePath}"
