@@ -1,0 +1,15 @@
+{
+"type": "FeatureCollection",
+"name": "tsumekusa",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "datetime": "2026年5月25日 13:30", "note": "", "photoId": "001" }, "geometry": { "type": "Point", "coordinates": [ 139.7424284, 35.6885271 ] } },
+{ "type": "Feature", "properties": { "datetime": "2026年5月11日 13:22", "note": "", "photoId": "002" }, "geometry": { "type": "Point", "coordinates": [ 139.7427193, 35.6877267 ] } },
+{ "type": "Feature", "properties": { "datetime": "2026年5月25日 13:25", "note": "", "photoId": "003" }, "geometry": { "type": "Point", "coordinates": [ 139.7440465, 35.6887996 ] } },
+{ "type": "Feature", "properties": { "datetime": "2026年5月25日 13:11", "note": "", "photoId": "004" }, "geometry": { "type": "Point", "coordinates": [ 139.742866099999986, 35.6905145 ] } },
+{ "type": "Feature", "properties": { "datetime": "2026年5月25日 13:20", "note": "", "photoId": "005" }, "geometry": { "type": "Point", "coordinates": [ 139.741318299999989, 35.6906744 ] } },
+{ "type": "Feature", "properties": { "datetime": "2026年5月18日 13:57", "note": "", "photoId": "006" }, "geometry": { "type": "Point", "coordinates": [ 139.7407638, 35.6908167 ] } },
+{ "type": "Feature", "properties": { "datetime": "2026年5月11日 13:23", "note": "", "photoId": "007" }, "geometry": { "type": "Point", "coordinates": [ 139.743047600000011, 35.6903757 ] } },
+{ "type": "Feature", "properties": { "datetime": "2026年5月25日 13:11", "note": "", "photoId": "008" }, "geometry": { "type": "Point", "coordinates": [ 139.7428596, 35.6904326 ] } }
+]
+}
