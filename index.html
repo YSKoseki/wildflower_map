@@ -261,7 +261,7 @@ Copyright (c) 2026 Koseki, Yusuke
         PLANTS.forEach(plant => {
             const span = document.getElementById(`point-count-${plant.id}`);
             if (span) {
-                span.textContent = `${plant.pointCount ?? 0}地点`;
+                span.textContent = `（${plant.pointCount ?? 0}地点）`;
             }
         });
         // 科ごとの地点数を更新
