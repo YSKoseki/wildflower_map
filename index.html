@@ -171,7 +171,7 @@ Copyright (c) 2026 Koseki, Yusuke
                     野の花マップ
                 </div>
                 <div id="menu-summary" class="menu-summary">
-                    登録数: 0科 0種 0地点
+                    登録数: 0科・0種・0地点
                 </div>
             </div>
         </div>
@@ -227,7 +227,9 @@ Copyright (c) 2026 Koseki, Yusuke
                     <input type="checkbox" class="family-checkbox" data-family="${familyId}">
                     <span>
                         ${FAMILIES[familyId].name}
-                        <span class="species-count">（${family.species.length}種）</span>
+                        <span class="species-count" id="family-count-${familyId}">
+                            （${family.species.length}種・0地点）
+                        </span>
                     </span>
                 </div>
                 <div class="family-children collapsed" data-family="${familyId}">
@@ -254,16 +256,30 @@ Copyright (c) 2026 Koseki, Yusuke
         }
 
         // メニューの地点数表示更新関数
-        function updatePointCounts() {
-            PLANTS.forEach(plant => {
-                const pointCount = document.getElementById(
-                    `point-count-${plant.id}`
-                );
-                if (pointCount) {
-                    pointCount.textContent = `（${plant.pointCount ?? 0}）`;
-                }
-            });
-        }
+   function updatePointCounts() {
+        // 種ごとの地点数を更新
+        PLANTS.forEach(plant => {
+            const span = document.getElementById(`point-count-${plant.id}`);
+            if (span) {
+                span.textContent = `${plant.pointCount ?? 0}地点`;
+            }
+        });
+        // 科ごとの地点数を更新
+        const families = groupPlantsByFamily();
+        Object.entries(families).forEach(([familyId, family]) => {
+            const totalPoints = family.species.reduce(
+                (sum, plant) => sum + (plant.pointCount ?? 0),
+                0
+            );
+            const span = document.getElementById(`family-count-${familyId}`);
+            if (span) {
+                span.textContent =
+                    `（${family.species.length}種・${totalPoints}地点）`;
+            }
+        });
+        // メニュー最下部の合計
+        updateMenuSummary();
+    }
 
         // メニュー概要（科・種・地点数）更新関数
         function updateMenuSummary() {
@@ -278,7 +294,7 @@ Copyright (c) 2026 Koseki, Yusuke
             );
             // 表示
             document.getElementById("menu-summary").textContent =
-                `登録数: ${familyCount}科 ${speciesCount}種 ${pointCount}地点`;
+                `登録数: ${familyCount}科・${speciesCount}種・${pointCount}地点`;
         }        
 
         // メニューコンテンツ生成関数
@@ -705,8 +721,6 @@ Copyright (c) 2026 Koseki, Yusuke
             await setupPlantLayers(map);
             // 地点数表示を更新
             updatePointCounts();
-            // メニュー概要を更新
-            updateMenuSummary();
         }
 
         // マップイベント設定関数
