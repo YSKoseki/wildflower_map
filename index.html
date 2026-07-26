@@ -359,34 +359,42 @@ Copyright (c) 2026 Koseki, Yusuke
 
         // 植物レイヤ追加関数
         async function addPlantLayer(map, plant) {
-            // GeoJSONを読み込む
-            const response = await fetch(`geojson/${plant.id}.geojson`);
-            const geojson = await response.json();
-
-            // 地点数を保存
-            plant.pointCount = geojson.features.length;
-
-            // ソース追加
-            map.addSource(getSourceId(plant.id), {
-                type: "geojson",
-                data: geojson
-            });
-
-            // レイヤ追加
-            map.addLayer({
-                id: getLayerId(plant.id),
-                type: "circle",
-                source: getSourceId(plant.id),
-                layout: {
-                    visibility: "visible"
-                },
-                paint: {
-                    "circle-radius": 6,
-                    "circle-color": plant.color,
-                    "circle-stroke-width": 1,
-                    "circle-stroke-color": plant.strokeColor
+            try {
+                // GeoJSONを読み込む
+                const response = await fetch(`geojson/${plant.id}.geojson`);
+                if (!response.ok) {
+                    throw new Error(
+                        `Failed to load geojson/${plant.id}.geojson (${response.status})`
+                    );
                 }
-            });
+                const geojson = await response.json();
+                // 地点数を保存
+                plant.pointCount = geojson.features.length;
+                console.log(plant.id, plant.pointCount);
+                // ソース追加
+                map.addSource(getSourceId(plant.id), {
+                    type: "geojson",
+                    data: geojson
+                });
+                // レイヤ追加
+                map.addLayer({
+                    id: getLayerId(plant.id),
+                    type: "circle",
+                    source: getSourceId(plant.id),
+                    layout: {
+                        visibility: "visible"
+                    },
+                    paint: {
+                        "circle-radius": 6,
+                        "circle-color": plant.color,
+                        "circle-stroke-width": 1,
+                        "circle-stroke-color": plant.strokeColor
+                    }
+                });
+            } catch (err) {
+                console.error(err);
+                plant.pointCount = 0;
+            }
         }
 
         // 植物レイヤ表示設定関数
