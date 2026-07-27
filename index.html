@@ -592,7 +592,9 @@ Copyright (c) 2026 Koseki, Yusuke
         function setupGrayscaleToggle(map) {
             document.getElementById("check-grayscale").addEventListener("change", (e) => {
                 const saturationValue = e.target.checked ? -1 : 0;
+                const opacityValue = e.target.checked ? 0.6 : 0.8;
                 map.setPaintProperty("osm-layer", "raster-saturation", saturationValue);
+                map.setPaintProperty("osm-layer", "raster-opacity", opacityValue);
             });
         }
 
@@ -707,7 +709,10 @@ Copyright (c) 2026 Koseki, Yusuke
                             type: "raster",
                             source: "osm-tiles",
                             minzoom: 0,
-                            maxzoom: 19
+                            maxzoom: 19,
+                            paint: {
+                                "raster-opacity": 0.75
+                            }
                         }
                     ]
                 }
