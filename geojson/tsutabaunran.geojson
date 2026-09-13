@@ -3,13 +3,13 @@
 "name": "tsutabaunran",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
-{ "type": "Feature", "properties": { "fid": 1 }, "geometry": { "type": "Point", "coordinates": [ 139.7412458, 35.6906522, 0.0 ] } },
-{ "type": "Feature", "properties": { "fid": 2 }, "geometry": { "type": "Point", "coordinates": [ 139.7410545, 35.6910063, 0.0 ] } },
-{ "type": "Feature", "properties": { "fid": 3 }, "geometry": { "type": "Point", "coordinates": [ 139.7411343, 35.6908705, 0.0 ] } },
-{ "type": "Feature", "properties": { "fid": 4 }, "geometry": { "type": "Point", "coordinates": [ 139.7403715, 35.6908351, 0.0 ] } },
-{ "type": "Feature", "properties": { "fid": 5 }, "geometry": { "type": "Point", "coordinates": [ 139.7412194, 35.6906834, 0.0 ] } },
-{ "type": "Feature", "properties": { "fid": 6 }, "geometry": { "type": "Point", "coordinates": [ 139.7413522, 35.6906712, 0.0 ] } },
-{ "type": "Feature", "properties": { "fid": 7 }, "geometry": { "type": "Point", "coordinates": [ 139.7412502, 35.6907145, 0.0 ] } },
-{ "type": "Feature", "properties": { "fid": 8 }, "geometry": { "type": "Point", "coordinates": [ 139.7411404, 35.6908539, 0.0 ] } }
+{ "type": "Feature", "properties": { "fid": 1, "species": "ツタバウンラン", "datetime": "2026年5月25日 13:20", "note": "", "photoId": "001" }, "geometry": { "type": "Point", "coordinates": [ 139.7412458, 35.6906522, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 2, "species": "ツタバウンラン", "datetime": "2026年5月18日 14:08", "note": "", "photoId": "002" }, "geometry": { "type": "Point", "coordinates": [ 139.7410545, 35.6910063, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 3, "species": "ツタバウンラン", "datetime": "2026年5月25日 13:22", "note": "", "photoId": "003" }, "geometry": { "type": "Point", "coordinates": [ 139.7411343, 35.6908705, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 4, "species": "ツタバウンラン", "datetime": "2026年5月25日 13:58", "note": "", "photoId": "004" }, "geometry": { "type": "Point", "coordinates": [ 139.7403715, 35.6908351, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 5, "species": "ツタバウンラン", "datetime": "2026年5月25日 13:21", "note": "", "photoId": "005" }, "geometry": { "type": "Point", "coordinates": [ 139.7412194, 35.6906834, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 6, "species": "ツバタウンラン", "datetime": "2026年5月25日 13:20", "note": "", "photoId": "006" }, "geometry": { "type": "Point", "coordinates": [ 139.7413522, 35.6906712, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 7, "species": "ツタバウンラン", "datetime": "2026年5月26日 13:21", "note": "", "photoId": "007" }, "geometry": { "type": "Point", "coordinates": [ 139.7412502, 35.6907145, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 8, "species": "ツタバウンラン", "datetime": "2026年5月25日 13:22", "note": "", "photoId": "008" }, "geometry": { "type": "Point", "coordinates": [ 139.7411404, 35.6908539, 0.0 ] } }
 ]
 }
