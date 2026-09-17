@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "akakatabami",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 1, "species": "アカカタバミ", "datetime": "2026年5月11日 13:41", "note": "", "photoId": "001" }, "geometry": { "type": "Point", "coordinates": [ 139.739779199999987, 35.6909086, 0.0 ] } }
+]
+}
