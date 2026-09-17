@@ -1,0 +1,17 @@
+{
+"type": "FeatureCollection",
+"name": "tanpopo",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 1, "species": "タンポポ（セイヨウタンポポ）", "datetime": "2026年5月11日 13:47", "note": "", "photoId": "001" }, "geometry": { "type": "Point", "coordinates": [ 139.742133, 35.6916458, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 2, "species": "タンポポ（セイヨウタンポポ）", "datetime": "2026年5月11日 13:44", "note": "", "photoId": "002" }, "geometry": { "type": "Point", "coordinates": [ 139.740708899999987, 35.6912178, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 3, "species": "タンポポ（セイヨウタンポポ）", "datetime": "2026年5月11日 13:35", "note": "", "photoId": "003" }, "geometry": { "type": "Point", "coordinates": [ 139.7401518, 35.6897939, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 4, "species": "タンポポ（セイヨウタンポポ）", "datetime": "2026年5月11日 13:47", "note": "", "photoId": "004" }, "geometry": { "type": "Point", "coordinates": [ 139.7434216, 35.6908321, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 5, "species": "タンポポ（セイヨウタンポポ）", "datetime": "2026年5月18日 13:30", "note": "", "photoId": "005" }, "geometry": { "type": "Point", "coordinates": [ 139.744338, 35.6900064, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 6, "species": "タンポポ（セイヨウタンポポ）", "datetime": "2026年5月25日 13:28", "note": "", "photoId": "006" }, "geometry": { "type": "Point", "coordinates": [ 139.7425838, 35.6888352, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 7, "species": "タンポポ（セイヨウタンポポ）", "datetime": "2026年5月18日 13:20", "note": "", "photoId": "007" }, "geometry": { "type": "Point", "coordinates": [ 139.747052599999989, 35.6911542, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 8, "species": "タンポポ（セイヨウタンポポ）", "datetime": "2026年5月11日 13:36", "note": "", "photoId": "008" }, "geometry": { "type": "Point", "coordinates": [ 139.746051099999988, 35.6912929, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 9, "species": "タンポポ（セイヨウタンポポ）", "datetime": "2026年5月11日 13:40", "note": "", "photoId": "009" }, "geometry": { "type": "Point", "coordinates": [ 139.7458508, 35.6903044, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 10, "species": "タンポポ（セイヨウタンポポ）", "datetime": "2026年5月18日 13:17", "note": "", "photoId": "010" }, "geometry": { "type": "Point", "coordinates": [ 139.7424301, 35.6888863, 0.0 ] } }
+]
+}
