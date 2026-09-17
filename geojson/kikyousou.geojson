@@ -1,0 +1,11 @@
+{
+"type": "FeatureCollection",
+"name": "kikyousou",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 1, "species": "キキョウソウ", "datetime": "2026年5月18日 13:34", "note": "", "photoId": "001" }, "geometry": { "type": "Point", "coordinates": [ 139.744828399999989, 35.6899461, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 2, "species": "キキョウソウ", "datetime": "2026年5月18日 13:34", "note": "", "photoId": "002" }, "geometry": { "type": "Point", "coordinates": [ 139.745967, 35.6923515, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 3, "species": "キキョウソウ", "datetime": "2026年5月18日 13:27", "note": "", "photoId": "003" }, "geometry": { "type": "Point", "coordinates": [ 139.747699399999988, 35.6898855, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 4, "species": "キキョウソウ", "datetime": "2026年5月25日 13:36", "note": "", "photoId": "004" }, "geometry": { "type": "Point", "coordinates": [ 139.745329, 35.6894263, 0.0 ] } }
+]
+}
