@@ -224,14 +224,6 @@ window.PLANTS = [
     },
     {
         familyId: FAMILY.KIJIKAKUSHI,
-        id: "ooamana",
-        species: "オオアマナ",
-        color: "#FFFFFF",
-        strokeColor: "#444",
-        pointCount: 0
-    },
-    {
-        familyId: FAMILY.KIJIKAKUSHI,
         id: "orizururan",
         species: "オリヅルラン",
         color: "#7BBF6A",
