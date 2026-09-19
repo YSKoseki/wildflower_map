@@ -71,9 +71,6 @@ window.FAMILIES = {
     [FAMILY.HAEDOKUSOU]: {
         name: "ハエドクソウ科"
     },
-    [FAMILY.AKANE]: {
-        name: "アカネ科"
-    },
     [FAMILY.AYAME]: {
         name: "アヤメ科"
     },
@@ -291,14 +288,6 @@ window.PLANTS = [
         id: "tokiwahaze",
         species: "トキワハゼ",
         color: "#9575CD",
-        strokeColor: "#666",
-        pointCount: 0
-    },
-    {
-        familyId: FAMILY.AKANE,
-        id: "himeyotsubamugura",
-        species: "ヒメヨツバムグラ",
-        color: "#66BB6A",
         strokeColor: "#666",
         pointCount: 0
     },
