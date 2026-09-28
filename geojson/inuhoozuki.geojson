@@ -3,8 +3,8 @@
 "name": "inuhoozuki",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
-{ "type": "Feature", "properties": { "fid": 1, "species": "イヌホオズキ", "datetime": "2026年5月●日 ●:●", "note": "ナス科ナス属、〈時期〉6-11月、〈特徴〉花は白い星型で、真ん中の大きな雄しべが特徴的。秋には黒い実をつける。実は毒性があるため食べることは出来ない。", "photoId": "001" }, "geometry": { "type": "Point", "coordinates": [ 139.7462373, 35.6913793, 0.0 ] } },
-{ "type": "Feature", "properties": { "fid": 2, "species": "イヌホオヅキ", "datetime": "2026年5月11日 ●:●", "note": "", "photoId": "002" }, "geometry": { "type": "Point", "coordinates": [ 139.746465199999989, 35.6913532, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 1, "species": "イヌホオズキ", "datetime": "2026年5月11日 13:29", "note": "ナス科ナス属、〈時期〉6-11月、〈特徴〉花は白い星型で、真ん中の大きな雄しべが特徴的。秋には黒い実をつける。実は毒性があるため食べることは出来ない。", "photoId": "001" }, "geometry": { "type": "Point", "coordinates": [ 139.7462373, 35.6913793, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 2, "species": "イヌホオズキ", "datetime": "2026年5月11日 13:33", "note": "", "photoId": "002" }, "geometry": { "type": "Point", "coordinates": [ 139.746465199999989, 35.6913532, 0.0 ] } },
 { "type": "Feature", "properties": { "fid": 3, "species": "イヌホオズキ", "datetime": "2026年5月18日 13:30", "note": "", "photoId": "003" }, "geometry": { "type": "Point", "coordinates": [ 139.7470701, 35.6895432, 0.0 ] } },
 { "type": "Feature", "properties": { "fid": 4, "species": "イヌホオズキ", "datetime": "2026年5月18日 13:31", "note": "", "photoId": "004" }, "geometry": { "type": "Point", "coordinates": [ 139.747161299999988, 35.6895475, 0.0 ] } },
 { "type": "Feature", "properties": { "fid": 5, "species": "イヌホオズキ", "datetime": "2026年5月11日 13:43", "note": "", "photoId": "005" }, "geometry": { "type": "Point", "coordinates": [ 139.7441402, 35.6900889, 0.0 ] } },
