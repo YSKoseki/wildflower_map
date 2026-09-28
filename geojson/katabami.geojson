@@ -1,0 +1,25 @@
+{
+"type": "FeatureCollection",
+"name": "katabami",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 1, "species": "カタバミ", "datetime": "2026年5月11日 13:31", "note": "", "photoId": "001" }, "geometry": { "type": "Point", "coordinates": [ 139.7461923, 35.6913866, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 2, "species": "カタバミ", "datetime": "2026年5月11日 13:40", "note": "", "photoId": "002" }, "geometry": { "type": "Point", "coordinates": [ 139.745910400000014, 35.6906099, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 3, "species": "カタバミ", "datetime": "2026年5月25日 13:25", "note": "", "photoId": "003" }, "geometry": { "type": "Point", "coordinates": [ 139.7442548, 35.6888363, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 4, "species": "カタバミ", "datetime": "2026年5月18日 13:29", "note": "", "photoId": "004" }, "geometry": { "type": "Point", "coordinates": [ 139.7476471, 35.6896633, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 5, "species": "カタバミ", "datetime": "2026年5月11日 13:31", "note": "カタバミ科カタバミ属、〈時期〉5-7月、〈特徴〉五弁の黄色い花で、クローバーのような葉を持つ。曇りや、夕方になると葉を閉じ、朝になると歯を開く。", "photoId": "005" }, "geometry": { "type": "Point", "coordinates": [ 139.7469045, 35.6912831, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 6, "species": "カタバミ", "datetime": "2026年5月18日 13:41", "note": "", "photoId": "006" }, "geometry": { "type": "Point", "coordinates": [ 139.7460184, 35.6925673, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 7, "species": "カタバミ", "datetime": "2026年5月18日 13:26", "note": "", "photoId": "007" }, "geometry": { "type": "Point", "coordinates": [ 139.743620099999987, 35.6888576, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 8, "species": "カタバミ", "datetime": "2026年5月25日 13:14", "note": "", "photoId": "008" }, "geometry": { "type": "Point", "coordinates": [ 139.743108, 35.6901951, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 9, "species": "カタバミ", "datetime": "2026年5月11日 13:23", "note": "", "photoId": "009" }, "geometry": { "type": "Point", "coordinates": [ 139.744642700000014, 35.6911865, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 10, "species": "カタバミ", "datetime": "2026年5月11日 13:23", "note": "", "photoId": "010" }, "geometry": { "type": "Point", "coordinates": [ 139.7442831, 35.6914811, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 11, "species": "カタバミ", "datetime": "2026年5月11日 13:30", "note": "", "photoId": "011" }, "geometry": { "type": "Point", "coordinates": [ 139.7441551, 35.6922205, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 12, "species": "カタバミ", "datetime": "2026年5月11日 13:27", "note": "", "photoId": "012" }, "geometry": { "type": "Point", "coordinates": [ 139.7419602, 35.6904226, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 13, "species": "カタバミ", "datetime": "2026年5月11日 13:43", "note": "", "photoId": "013" }, "geometry": { "type": "Point", "coordinates": [ 139.7400729, 35.6910001, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 14, "species": "カタバミ", "datetime": "2026年5月25日 13:28", "note": "", "photoId": "014" }, "geometry": { "type": "Point", "coordinates": [ 139.7417968, 35.689416, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 15, "species": "カタバミ", "datetime": "2026年5月11日 13:43", "note": "", "photoId": "015" }, "geometry": { "type": "Point", "coordinates": [ 139.7405177, 35.6911446, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 16, "species": "カタバミ", "datetime": "2026年5月11日 13:32", "note": "", "photoId": "016" }, "geometry": { "type": "Point", "coordinates": [ 139.7406231, 35.6888854, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 17, "species": "カタバミ", "datetime": "2026年5月25日 13:12", "note": "", "photoId": "017" }, "geometry": { "type": "Point", "coordinates": [ 139.7428018, 35.690435, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 18, "species": "カタバミ", "datetime": "2026年5月11日 13:25", "note": "", "photoId": "018" }, "geometry": { "type": "Point", "coordinates": [ 139.744801, 35.6920139, 0.0 ] } }
+]
+}
