@@ -1,0 +1,11 @@
+{
+"type": "FeatureCollection",
+"name": "nagamihinageshi",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 1, "species": "ナガミヒナゲシ", "datetime": "2026年5月26日 13:35", "note": "", "photoId": "001" }, "geometry": { "type": "Point", "coordinates": [ 139.7403488, 35.6900167, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 2, "species": "ナガミヒナゲシ", "datetime": "2026年5月11日 13:39", "note": "", "photoId": "002" }, "geometry": { "type": "Point", "coordinates": [ 139.739671468322996, 35.690487584733582, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 3, "species": "ナガミヒナゲシ", "datetime": "2026年5月25日 13:23", "note": "", "photoId": "003" }, "geometry": { "type": "Point", "coordinates": [ 139.741839700000014, 35.6896638, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 4, "species": "ナガミヒナゲシ", "datetime": "2026年5月11日 13:48", "note": "", "photoId": "004" }, "geometry": { "type": "Point", "coordinates": [ 139.7456564, 35.689614, 0.0 ] } }
+]
+}
