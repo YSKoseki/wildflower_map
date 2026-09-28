@@ -3,7 +3,6 @@
 "name": "hakidamigiku",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
-{ "type": "Feature", "properties": { "fid": 1, "species": "ハキダメギク", "datetime": "2026年5月11日 13:37", "note": "", "photoId": "001" }, "geometry": { "type": "Point", "coordinates": [ 139.7397351, 35.6904207, 0.0 ] } },
-{ "type": "Feature", "properties": { "fid": 2, "species": "ハキダメギク", "datetime": "2026年5月25日 13:25", "note": "", "photoId": "002" }, "geometry": { "type": "Point", "coordinates": [ 139.7446632, 35.6889414, 0.0 ] } }
+{ "type": "Feature", "properties": { "fid": 1, "species": "ハキダメギク", "datetime": "2026年5月11日 13:37", "note": "", "photoId": "001" }, "geometry": { "type": "Point", "coordinates": [ 139.7397351, 35.6904207, 0.0 ] } }
 ]
 }
