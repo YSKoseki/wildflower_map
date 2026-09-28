@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "kanshirogiku",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 1, "species": "カンシロギク", "datetime": "2026年5月20日 13:20", "note": "別名ノースポール", "photoId": "001" }, "geometry": { "type": "Point", "coordinates": [ 139.74337220000001, 35.6913424, 0.0 ] } }
+]
+}
