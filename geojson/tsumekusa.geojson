@@ -11,6 +11,7 @@
 { "type": "Feature", "properties": { "fid": 6, "species": "ツメクサ", "datetime": "2026年5月18日 13:57", "note": "", "photoId": "006" }, "geometry": { "type": "Point", "coordinates": [ 139.7407638, 35.6908167, 0.0 ] } },
 { "type": "Feature", "properties": { "fid": 7, "species": "ツメクサ", "datetime": "2026年5月11日 13:23", "note": "", "photoId": "007" }, "geometry": { "type": "Point", "coordinates": [ 139.743047600000011, 35.6903757, 0.0 ] } },
 { "type": "Feature", "properties": { "fid": 8, "species": "ツメクサ", "datetime": "2026年5月25日 13:11", "note": "", "photoId": "008" }, "geometry": { "type": "Point", "coordinates": [ 139.7428596, 35.6904326, 0.0 ] } },
-{ "type": "Feature", "properties": { "fid": 9, "species": "ツメクサ", "datetime": "2026年5月18日 13:17", "note": "", "photoId": "009" }, "geometry": { "type": "Point", "coordinates": [ 139.7467925, 35.6913106, 0.0 ] } }
+{ "type": "Feature", "properties": { "fid": 9, "species": "ツメクサ", "datetime": "2026年5月18日 13:17", "note": "", "photoId": "009" }, "geometry": { "type": "Point", "coordinates": [ 139.7467925, 35.6913106, 0.0 ] } },
+{ "type": "Feature", "properties": { "fid": 10, "species": "アライトツメクサ", "datetime": "2026年5月11日 13:26", "note": "", "photoId": "010" }, "geometry": { "type": "Point", "coordinates": [ 139.74475910000001, 35.6921812, 0.0 ] } }
 ]
 }
