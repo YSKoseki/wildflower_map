@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "amerikafuuro",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 1, "species": "アメリカフウロ", "datetime": "2026年5月11日 13:38", "note": "", "photoId": " 001" }, "geometry": { "type": "Point", "coordinates": [ 139.739688199999989, 35.6904991, 0.0 ] } }
+]
+}
