@@ -93,14 +93,6 @@ window.PLANTS = [
     },
     {
         familyId: FAMILY.KIKU,
-        id: "harujion",
-        species: "ハルジオン",
-        color: "#F4D03F",
-        strokeColor: "#666",
-        pointCount: 0
-    },
-    {
-        familyId: FAMILY.KIKU,
         id: "tanpopo",
         species: "タンポポ",
         color: "#FFD400",
@@ -152,22 +144,6 @@ window.PLANTS = [
         id: "tsumekusa",
         species: "ツメクサ",
         color: "#F3C6D3",
-        strokeColor: "#666",
-        pointCount: 0
-    },
-    {
-        familyId: FAMILY.NADESHIKO,
-        id: "hakobe",
-        species: "ハコベ",
-        color: "#F8BBD0",
-        strokeColor: "#444",
-        pointCount: 0
-    },
-    {
-        familyId: FAMILY.NADESHIKO,
-        id: "araitotsumekusa",
-        species: "アライトツメクサ",
-        color: "#F48FB1",
         strokeColor: "#666",
         pointCount: 0
     },
