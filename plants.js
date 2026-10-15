@@ -24,10 +24,8 @@ window.FAMILY = {
     MURASAKI: "murasaki",
     ABURANA: "aburana",
     TADE: "tade",
-    HAEDOKUSOU: "haedokusou",
-    AKANE: "akane",
+    SAGIGOKE: "sagigoke",
     AYAME: "ayame",
-    HIMAWARI: "himawari",
     FUUROSOU: "fuurosou"
 };
 
@@ -68,14 +66,11 @@ window.FAMILIES = {
     [FAMILY.TADE]: {
         name: "タデ科"
     },
-    [FAMILY.HAEDOKUSOU]: {
-        name: "ハエドクソウ科"
+    [FAMILY.SAGIGOKE]: {
+        name: "サギゴケ科"
     },
     [FAMILY.AYAME]: {
         name: "アヤメ科"
-    },
-    [FAMILY.HIMAWARI]: {
-        name: "ヒマワリ科"
     },
     [FAMILY.FUUROSOU]: {
         name: "フウロソウ科"
@@ -260,7 +255,7 @@ window.PLANTS = [
 		pointCount: 0
 	},
 	{
-		familyId: FAMILY.HAEDOKUSOU,
+		familyId: FAMILY.SAGIGOKE,
 		id: "tokiwahaze",
 		species: "トキワハゼ",
 		color: "#9575CD",
@@ -276,7 +271,7 @@ window.PLANTS = [
 		pointCount: 0
 	},
 	{
-		familyId: FAMILY.HIMAWARI,
+		familyId: FAMILY.KIKU,
 		id: "mamekamitsure",
 		species: "マメカミツレ",
 		color: "#FFF176",
