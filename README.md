@@ -2,11 +2,9 @@
 Interactive map of wildflowers around the Otsuma Women's University campus
 
 ## Motivation
-Cities are made up mostly of buildings, roads, and other human-made structures. With so little nature around them, many city dwellers have slowly lost interest in the natural world. This is often called “disconnection from nature.” As people drift away from nature, they also come to care less about it.
+Cities are made up mostly of buildings, roads, and other human-made structures. With less nature around them, many city dwellers have fewer chances to experience nature in daily life and have also become less interested in it ([Miller 2005](https://doi.org/10.1016/j.tree.2005.05.013); [Soga & Gaston 2016](https://doi.org/10.1002/fee.1225)). As people become disconnected from nature, they also tend to care less about it ([Soga & Gaston 2016](https://doi.org/10.1002/fee.1225)).
 
-To bring back this interest and care, the first step is to notice the nature that is already around us in daily life. After all, we can’t care about something we don’t know is there.
-
-With this in mind, we, members of the Conservation Biology Lab at Otsuma Women’s University, took a closer look at the nature under our feet that often goes unnoticed. We recorded which wild plants grow where, and how many of them there are, and shared the results on an interactive web map.
+To bring back this interest and care, a good first step is to notice the nature that is already around us. With this in mind, we, members of the Conservation Biology Lab at Otsuma Women's University, took a closer look at the often-unnoticed nature under our feet. We recorded which wild plants grow where and shared the results on an interactive web map.
 
 ## Screenshot
 <img src="screenshot/demo.gif" width="800" alt="大妻女子大学周辺 野の花マップ">
